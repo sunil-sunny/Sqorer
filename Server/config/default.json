@@ -1,0 +1,5 @@
+{
+	"mongoUri": "mongodb+srv://Fley027:mathGame@cluster0.xjk8o.mongodb.net/mathGameQuiz?retryWrites=true&w=majority",
+	"jwtSecret": "Encrypt Data String For MathOnlineGame Project"
+	
+}

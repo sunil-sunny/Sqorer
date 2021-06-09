@@ -1,0 +1,54 @@
+ion-row {
+    height: fit-content;
+  }
+  
+  //1140px -xl
+  //960px -lg
+  //720px -md
+  //540 -sm
+  
+  .profile-header {
+    display: block;
+    width: 400px;
+    height: 119px;
+    object-fit: inherit;
+    object-position: inherit;
+  }
+  
+  .profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-top: -30px;
+  }
+  
+  .profile-name {
+    position: absolute;
+    top: 110%;
+    margin-left: 10px;
+  }
+  
+  .profile-role {
+    position: absolute;
+    top: 150%;
+    margin-left: 10px;
+  }
+  
+  ion-button {
+    width: fit-content;
+    height: 40px;
+    font-size: x-small;
+    padding-top: 10px;
+  }
+  
+  .team-count {
+    position: absolute;
+    top: 120%;
+  }
+  
+  .team-label {
+    position: absolute;
+    top: 100%;
+  }
+  

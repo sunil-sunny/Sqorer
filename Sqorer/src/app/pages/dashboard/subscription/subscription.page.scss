@@ -1,0 +1,31 @@
+@import "src/app/app.component.scss";
+
+.subscription-col {
+  border-radius: 10px;
+  border: 1px solid green;
+  background-color: white;
+}
+
+.main-col {
+  border-radius: 10px;
+  background-color: white;
+}
+
+.divider {
+  height: 0px;
+  border: 1px solid green;
+  background-color: green;
+}
+
+ion-label {
+  text-align: center;
+}
+
+li {
+  color: green;
+  padding: 10px;
+  p {
+      color: black;
+  }
+}
+

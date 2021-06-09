@@ -1,0 +1,101 @@
+ion-split-pane {
+  --side-min-width: 10px;
+  --side-max-width: 60px;
+  --side-width: 60px;
+}
+
+.custom {
+  --width: 100px;
+}
+
+.row-align {
+  display: flex;
+  flex-direction: row;
+}
+
+ion-menu-toggle{
+  width: 100%;
+}
+h1 {
+  font-family: Poppins !important;
+  font-weight: bold;
+  color: #14a800;
+  font-size: 24;
+}
+
+h2 {
+  font-family: Poppins !important;
+  font-weight: bold;
+  color: #14a800;
+  font-size: 20;
+}
+
+h4 {
+  font-family: Poppins !important;
+  font-weight: normal;
+  color: #002060;
+  font-size: 12;
+}
+
+p {
+  font-family: Poppins !important;
+  font-weight: normal;
+  color: #002060;
+  font-size: 12;
+  margin-bottom: 0px;
+}
+
+.padding-vertical {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+ion-button {
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.padding-horizantal{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.padding-top-sm{
+  padding-top: 10px;
+}
+
+span{
+  color: white;
+  font-size: 14px;
+}
+
+.place-align-center{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.hide-sm{
+  display: block;
+}
+
+.hide-lg{
+  display: none;
+}
+
+@media (max-width: 540px) {
+  /* For mobile phones: */
+
+  .hide-sm{
+    display: none;
+  }
+
+  .hide-lg{
+    display: block;
+  }
+}
+
+
+

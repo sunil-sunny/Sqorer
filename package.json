@@ -1,0 +1,23 @@
+{
+  "name": "angular-ionic-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server-install": "cd Server & npm i",
+    "client-install": "cd Sqorer & npm i",
+    "server": "cd Server & npm start",
+    "client": "cd Sqorer & ionic serve -p 8081",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://AugmentEdutech@dev.azure.com/AugmentEdutech/Sqorer/_git/Sqorer"
+  },
+  "author": "Sai Sunil Menta",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}

@@ -1,0 +1,424 @@
+<ion-header>
+    <ion-grid>
+        <ion-row class="toolbar">
+            <ion-col size-xl="3" offset-xl="0.75" size-lg="3.5" offset-lg="-1.5" size-xs="4" offset-xs="1.5"
+                size-md="4.25" offset-md="-1.5" class="header-col hide-sm">
+                <ion-title class="ion-no-border">
+                    <ion-button>Sqorer</ion-button>
+                </ion-title>
+            </ion-col>
+
+            <ion-col size-xs="2" offset-xs="0" class="hide-lg">
+                <ion-icon name="finger-print-outline" size="large" color="primary"></ion-icon>
+            </ion-col>
+
+            <ion-col size-xl="2" offset-xl="-0.75" size-lg="2.5" size-xs="8" offset-xs="-1" size-md="2.5"
+                class="ion-padding-vertical">
+                <ion-item style="width: fit-content;" lines="none" class="header-input">
+                    <ion-input placeholder="enter game code"></ion-input>
+                    <ion-icon name="play" color="primary"></ion-icon>
+                </ion-item>
+            </ion-col>
+            <ion-col size-xl="2" size-lg="1.75" offset-xl="0.75" size-xs="12" size-md="1.75" class="hide-sm">
+                <p style="width: fit-content; margin-top: 10px; font-weight: bold;">
+                    Skillometer
+                </p>
+            </ion-col>
+
+            <ion-col size-xl="1.5" size-lg="1.5" size-xs="12" size-md="1.5" offset-lg="-0.5" class="hide-sm">
+                <p style="width: fit-content; margin-top: 10px; font-weight: bold;">
+                    About us
+                </p>
+            </ion-col>
+
+            <ion-col size-xl="1.5" size-lg="1.5" size-xs="12" size-md="1.5" class="header-col hide-sm">
+                <p style="width: fit-content; margin-top: 10px; font-weight: bold;" routerLink="/login">
+                    Sign in
+                </p>
+            </ion-col>
+
+            <ion-col size-xs="1.5" offset-xs="1" class="hide-lg">
+                <ion-icon name="person" color="primary" size="large" (click)="openPopOver($event)"></ion-icon>
+            </ion-col>
+
+            <ion-col size-xl="1.5" size-lg="1.75" offset-lg="-0.25" size-xs="12" size-md="1.75" offset-md="-0.25"
+                class="header-col hide-sm">
+                <ion-button (click)="goToSignUpPage()">SIGN UP</ion-button>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+</ion-header>
+
+<ion-content class="ion-no-padding" [fullscreen]="true">
+    <ion-grid class="ion-no-padding">
+
+        <!--Header-->
+
+        <ion-row class="header-row">
+            <ion-col size="12">
+                <ion-img style="height: 500px; object-fit: unset;" src='{{homeImage}}' alt='No Image'></ion-img>
+            </ion-col>
+        </ion-row>
+
+        <!-- Second section start-->
+
+        <ion-row class="header-row" style="height: fit-content; padding-top: 100px; padding-bottom: 100px;">
+            <ion-col size="12">
+                <ion-row>
+                    <ion-col size-xl="2" offset-xl="0.5" size-lg="2" offset-lg="0" size-xs="10" offset-xs="5.5"
+                        size-md="3" offset-md="1" size-sm="5" offset-sm="1">
+                        <div class="stats ion-text-center ion-padding-vertical">
+                            <h1 style="color: #002060; font-weight: bolder;">62,756</h1>
+                        </div>
+                    </ion-col>
+                    <ion-col size-xl="1.5" offset-xl="-1" size-lg="1.5" offset-lg="-0.5" size-xs="10" size-md="3"
+                        offset-md="-1" size-sm="5" offset-sm="-3">
+                        <div class="stats-text ion-text-center">
+                            <h1>Sums solved</h1>
+                        </div>
+                    </ion-col>
+                    <ion-col size-xl="2" offset-xl="2" size-lg="2" offset-lg="2" size-xs="10" offset-xs="5.5"
+                        size-md="3" offset-md="1" size-sm="5" offset-sm="1">
+                        <div class="stats ion-text-center ion-padding-vertical">
+                            <h1 style="color: #002060; font-weight: bolder;">2215</h1>
+                        </div>
+                    </ion-col>
+                    <ion-col size-xl="2" offset-xl="-1" size-lg="2" offset-lg="-0.5" size-xs="10" size-md="3"
+                        offset-md="-1" size-sm="5" offset-sm="-3">
+                        <div class="stats-text ion-text-center">
+                            <h1>students learning</h1>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col size-xl="6" offset-xl="0" size-lg="6" offset-lg="1" size-xs="10" offset-xs="1" size-md="4"
+                        offset-md="1">
+                        <p style="text-align: start;">and the numbers are just rising sky high</p>
+                    </ion-col>
+                    <ion-col size-xl="4" offset-xl="-3" size-lg="4" offset-lg="-2" size-xs="3" offset-xs="0" size-md="4"
+                        offset-md="1">
+                        <ion-button class="btn-start">Start</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <!-- Third section starts-->
+
+        <ion-row class="header-row padding-vertical" style="height: fit-content;">
+            <ion-col size="12">
+                <ion-row>
+                    <h1>Start Free with most engaging platform</h1>
+                </ion-row>
+                <ion-row>
+                    <h4>and give your children the sqorer advantage</h4>
+                </ion-row>
+
+                <!-- First Row -->
+                <ion-row style="height: fit-content;">
+                    <!-- First config-->
+                    <ion-col *ngFor="let d of sectionThreeDetails" size-xl="5" offset-xl="0.5" size-xs="10"
+                        offset-xs="1" style="margin-bottom: 100px;">
+
+                        <ion-row>
+                            <ion-col size-xl="3" size-md="3" offset-md="-1" size-xs="10" offset-xs="1.5" size-lg="3"
+                                offset-lg="0">
+                                <!-- image -->
+                                <ion-img style="height: 150px; width: 175px;" src='{{d.image}}' alt='first image'>
+                                </ion-img>
+                            </ion-col>
+
+                            <ion-col size-xl="6" size-lg="6" offset-lg="0" size-md="6" offset-md="1" size-xs="10"
+                                offset-xs="-1" offset-xl="0.5" style="padding-left: 15px;">
+                                <!-- content -->
+                                <ion-row style="justify-content: left;">
+                                    <h2>
+                                        {{d.description}}
+                                    </h2>
+                                </ion-row>
+
+                                <ion-row style="justify-content: left;">
+                                    <p style="text-align: left;">
+                                        {{d.content}}
+                                    </p>
+                                </ion-row>
+                            </ion-col>
+                        </ion-row>
+
+                    </ion-col>
+
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <!-- Fourth Section -->
+
+        <ion-row class="header-row padding-vertical">
+            <ion-col size="12">
+                <ion-row style="padding-bottom: 25px;">
+                    <ion-col size-xl="3" size-lg="3" size-md="10" offset-md="0" size-xs="10" offset-xs="1">
+                        <ion-row>
+                            <h1>Why use Sqorer</h1>
+                        </ion-row>
+                        <ion-row>
+                            <p style="text-align: center;">and give your children the sqorer advantage</p>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row style="justify-content: space-evenly;">
+                    <ion-col *ngFor="let d of sectionFourDetails" size-xl="2" size-lg="3"
+                        offset-lg="0.25" size-md="3" offset-md="0.25" size-sm="10" offset-sm="1">
+
+                        <ion-row style="justify-content: left;">
+                            <ion-col size="12" class="image-center">
+                                <ion-img src="{{d.image}}" style="border-radius: 50%; width: 200px;
+                                height: 150px;">
+                                </ion-img>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row style="justify-content: left;">
+                            <ion-col size="12">
+                                <h2 style="text-align: center; margin-bottom: 0px;" class="ion-no-margin">
+                                    {{d.description}}</h2>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row style="justify-content: left;">
+
+                            <p style="text-align: center;"> {{d.content}}</p>
+
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <!--Fifth section-->
+        <!--Corosel-->
+
+        <ion-row class="header-row padding-vertical">
+            <ion-col size="12" style="padding-bottom: 25px;">
+                <ion-row>
+                    <h1>What our users say</h1>
+                </ion-row>
+                <ion-row>
+                    <p style="text-align: center;">and give your children the sqorer advantage</p>
+                </ion-row>
+            </ion-col>
+            <ion-col size-xl="1" offset-xl="1" size-lg="0.5" offset-md="0.25" size-md="1">
+                <span class="slider-nav arrow-prev" (click)="slidePrev(sliderTwo,slideWithNav2)">
+                    <div class="custon-nav" [class.disabled]="sliderTwo.isBeginningSlide">
+                        <ion-icon name="chevron-back-outline" color="primary" size="large"></ion-icon>
+                    </div>
+                </span>
+            </ion-col>
+            <ion-col size-xl="8" offset-xl="0" size-lg="8" size-md="9">
+
+                <ion-slides pager="false" [options]="slideOptsTwo" #slideWithNav2
+                    (ionSlideDidChange)="slideDidChange(sliderTwo,slideWithNav2)">
+                    <ion-slide *ngFor="let s of sliderTwo.slidesItems">
+                        <ion-card>
+                            <ion-card-header class="ion-no-padding" style=" border-radius: 50%;">
+                                <ion-card-subtitle style="display: flex; justify-content: center;">
+                                    <ion-img style="width: 120px;
+                                    height: 100%;
+                                    object-fit: inherit;
+                                    object-position: inherit;border-radius: 50%;"
+                                        src="https://www.shareicon.net/data/512x512/2016/07/26/802043_man_512x512.png">
+                                    </ion-img>
+                                </ion-card-subtitle>
+                                <ion-card-title>
+                                    <h1 style="text-align: center; margin-bottom: 0px;">
+                                        Quick setup
+                                    </h1>
+                                </ion-card-title>
+                            </ion-card-header>
+                            <ion-card-content class="ion-text-center">
+                                <p style="text-align: center;"> Get ready with your account in minutes and start scoring
+                                    with your friends.</p>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-slide>
+                </ion-slides>
+
+            </ion-col>
+            <ion-col size-xl="1" offset-xl="1" size-lg="0.5" offset-lg="0.25" size-md="1" offset-md="0.5">
+                <span class="slider-nav arrow-next" (click)="slideNext(sliderTwo,slideWithNav2)">
+                    <div class="custon-nav" [class.disabled]="sliderTwo.isEndSlide">
+                        <ion-icon name="chevron-forward-outline" color="primary" size="large"></ion-icon>
+                    </div>
+                </span>
+            </ion-col>
+        </ion-row>
+
+
+        <!-- Sixth section-->
+        <ion-row class="header-row padding-vertical">
+            <ion-col size-xl="3" offset-xl="0.5" size-lg="3" offset-lg="-0.25" size-xs="10" size-md="6" offset-md="3">
+                <ion-row style="justify-content: left;">
+                    <h1 style="text-align: left;">Sign up now</h1>
+                </ion-row>
+                <ion-row style="justify-content: left;">
+                    <p style="text-align: left;">and give your children the sqorer advantage</p>
+                </ion-row>
+            </ion-col>
+            <ion-col size-xl="2.5" offset-xl="1" size-lg="2.5" offset-lg="0" size-xs="10" size-md="5" offset-md="3">
+                <ion-row style="justify-content: left;">
+                    <ion-button (click)="goToSignUpPage()" class="primary btn-start">Teachers</ion-button>
+                </ion-row>
+                <ion-row style="padding-top: 10px; justify-content: left;">
+                    <p style="text-align: left; width: 200px;">and give your children the sqorer advantage</p>
+                </ion-row>
+            </ion-col>
+            <ion-col size-xl="2.5" offset-xl="0" size-lg="2.5" offset-lg="0" size-xs="10" size-md="5" offset-md="3">
+                <ion-row style="justify-content: left;">
+                    <ion-button (click)="goToSignUpPage()" class="primary btn-start">Students</ion-button>
+                </ion-row>
+                <ion-row style="padding-top: 10px; width: 200px;">
+                    <p style="text-align: left;">and give your children the sqorer advantage</p>
+                </ion-row>
+            </ion-col>
+            <ion-col size-xl="2.5" offset-xl="0" size-lg="2.5" offset-lg="0" size-xs="10" size-md="5" offset-md="3">
+                <ion-row style="justify-content: left;">
+                    <ion-button (click)="goToSignUpPage()" class="primary btn-start">Parents</ion-button>
+                </ion-row>
+                <ion-row style="padding-top: 10px; width: 200px;">
+                    <p style="text-align: left;">and give your children the sqorer advantage</p>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <!--Seventh Section-->
+        <ion-row class="header-row padding-vertical">
+            <ion-col size-xl="4" size-lg="5" offset-lg="1" size-xs="10" offset-xs="1">
+                <ion-row style="justify-content: left;">
+                    <h1>Say hello</h1>
+                </ion-row>
+                <ion-row style="justify-content: left;">
+                    <p style="text-align: left;">Feel free to contact us for any questions at contact@sqorer.com or
+                        leave a question</p>
+                </ion-row>
+            </ion-col>
+            <ion-col size-xl="6" size-lg="5" offset-lg="1" size-xs="10">
+                <ion-row>
+                    <ion-item style="width: 500px;">
+                        <ion-label position="floating">name</ion-label>
+                        <ion-input></ion-input>
+                    </ion-item>
+                </ion-row>
+                <ion-row>
+                    <ion-item style="width: 500px;">
+                        <ion-label position="floating">mobile number</ion-label>
+                        <ion-input type="text"></ion-input>
+                    </ion-item>
+                </ion-row>
+                <ion-row>
+                    <ion-item style="width: 500px;">
+                        <ion-label position="floating">email</ion-label>
+                        <ion-input type="email"></ion-input>
+                    </ion-item>
+
+                </ion-row>
+                <ion-row>
+                    <ion-item style="width: 500px;">
+                        <ion-label position="floating">How can we help you</ion-label>
+                        <ion-textarea></ion-textarea>
+                    </ion-item>
+                </ion-row>
+                <ion-row class="btn-send">
+                    <ion-button color="primary btn-start">send</ion-button>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <!--Footer -->
+
+        <ion-row class="padding-vertical" style="background-color: #f2f2f2; height: fit-content;">
+            <ion-col size="12">
+                <ion-row>
+                    <ion-col size-xl="3" offset-xl="1" size-lg="3" offset-lg="0" size-xs="10" offset-xs="0">
+                        <ion-row style="justify-content: left;">
+                            <h1>Sqorer Logo</h1>
+                        </ion-row>
+                        <ion-row style="justify-content: left;">
+                            <p style="text-align: left;">Feel free to contact us for any questions at
+                                contact@sqorer.com or leave a question</p>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col size-xl="3" offset-xl="0" size-lg="3" offset-lg="1" size-xs="10" offset-xs="0">
+                        <ion-row style="justify-content: left;">
+                            <h1>Whatsnew@sqorer</h1>
+                        </ion-row>
+                        <ion-row style="justify-content: left;">
+                            <p style="text-align: left;">Feel free to contact us for any questions at
+                                contact@sqorer.com or leave a question</p>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col size-xl="3" offset-xl="0" size-lg="3" offset-lg="1" size-xs="10" offset-xs="0">
+                        <ion-row style="padding-bottom:10px; justify-content: left;">
+                            <ion-item lines="none" class="header-input">
+                                <ion-input placeholder="your email ID"></ion-input>
+                                <ion-icon name="send-sharp" color="primary"></ion-icon>
+                            </ion-item>
+                        </ion-row>
+                        <ion-row style="justify-content: left;">
+                            <p style="text-align: left;">Feel free to contact us for any questions at
+                                contact@sqorer.com or leave a question</p>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+
+                <!-- footer-second-row -->
+                <ion-row style="padding-top: 10px;">
+                    <ion-col size-xl="3" offset-xl="0" size-lg="3" offset-lg="0" size-xs="10" offset-xs="0">
+                        <ion-row>
+                            <a>About us</a>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col size-xl="3" offset-xl="0" size-lg="3" offset-lg="1" size-xs="10" offset-xs="0">
+                        <ion-row>
+                            <a>Our vision</a>
+                        </ion-row>
+                    </ion-col>
+                    <ion-col size-xl="3" offset-xl="0" size-lg="3" offset-lg="1" size-xs="10" offset-xs="0">
+                        <ion-row>
+                            <a>Articles</a>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+
+                <!-- footer-third-row -->
+                <ion-row style="padding-top: 20px;">
+                    <ion-col size-xl="3" offset-xl="0" size-xs="12" size-md="12" offset-md="-5.5" size-lg="12"
+                        offset-lg="-6">
+                        <p>© 2021 sqorer, An Augment Edutech Initiative</p>
+                    </ion-col>
+                    <ion-col size-xl="1" offset-xl="1" size-xs="5" offset-xs="4.5" size-md="6" offset-md="5"
+                        size-lg="1" offset-lg="1">
+                        <ion-img style="width: 35px; margin-top: 1px;"
+                            src='https://pngmind.com/wp-content/uploads/2019/08/Facebook-Png-Logo.png'>
+                        </ion-img>
+                    </ion-col>
+                    <ion-col size-xl="1" offset-xl="-0.65" size-xs="5" offset-xs="-3.5" size-md="6" offset-md="-5"
+                        size-lg="1" offset-lg="-0.5">
+                        <ion-img style="width: 30px;  margin-top: 4px;"
+                            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9rvbPL6hul0tyA3gOxM39xzr5rzI6ztZSgQ&usqp=CAU'>
+                        </ion-img>
+                    </ion-col>
+                    <ion-col size-xl="1.5" offset-xl="1" size-xs="12" offset-xs="-6" size-md="6" offset-md="-4"
+                        size-lg="4" offset-lg="0">
+                        <p>Terms and conditions | </p>
+                    </ion-col>
+                    <ion-col size-xl="1.5" offset-xl="-0.25" size-xs="12" offset-xs="-7.5" size-md="6" offset-md="-3"
+                        size-lg="4" offset-lg="-2">
+                        <p> Privacy Policy</p>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+
+    </ion-grid>
+</ion-content>

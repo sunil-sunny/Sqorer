@@ -1,0 +1,145 @@
+<ion-app>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+
+  <ion-menu side="start" contentId="main" type="push">
+    <ion-content>
+      <ion-list id="inbox-list">
+        <ion-list-header class="padding-top-sm" style="display: flex; flex-direction: row;">
+          <ion-icon name="finger-print-outline" style="font-size: 20px; color: white;"></ion-icon>
+          <span style="color: white; font-size: small; margin-left: 5px;">
+            SKOTE
+          </span>
+        </ion-list-header>
+
+        <ion-list-header class="padding-top-sm" style="display: flex; flex-direction: row;">
+          <span>Menu</span>
+        </ion-list-header>
+
+        <ion-item style="padding-left: 15px;" lines="none">
+          <ion-menu-toggle>
+            
+              <span>
+                <ion-icon name="home" style="padding-right: 3px;"></ion-icon>
+                Dashboard
+              </span>
+            
+          </ion-menu-toggle>
+        </ion-item>
+
+
+
+
+        <ion-list-header class="padding-top-sm" style="display: flex; flex-direction: row;">
+          <span>GAME</span>
+        </ion-list-header>
+
+
+        <ion-item style="padding-left: 15px;" lines="none">
+          <ion-menu-toggle>
+            
+              <span>
+                <ion-icon name="calendar-outline" style="padding-right: 3px;"></ion-icon>
+                Game calender
+              </span>
+            
+          </ion-menu-toggle>
+
+        </ion-item>
+
+
+        <ion-item style="padding-left: 15px;" lines="none">
+          <ion-menu-toggle>
+            <span color="primary" lines="none">
+              <span>
+                <ion-icon name="compass-outline" style="padding-right: 3px;"></ion-icon>
+                Start a new game
+              </span>
+            </span>
+          </ion-menu-toggle>
+        </ion-item>
+
+        <ion-list-header class="padding-top-sm" style="display: flex; flex-direction: row;">
+          <span>STUDENTS & TEAMS</span>
+        </ion-list-header>
+
+        <ion-item style="padding-left: 15px;" lines="none">
+          <ion-menu-toggle>
+            <span color="primary" lines="none">
+              <span>
+                <ion-icon name="person-outline" style="padding-right: 3px;"></ion-icon>
+                Students
+              </span>
+            </span>
+          </ion-menu-toggle>
+        </ion-item>
+
+        <ion-item style="padding-left: 15px;" lines="none">
+          <ion-menu-toggle>
+            <span color="primary" lines="none">
+              <span>
+                <ion-icon name="document-outline" style="padding-right: 3px;"></ion-icon>
+                Teams
+                <ion-icon name="chevron-down-outline" style="padding-top: 3px;" class="ion-float-right"></ion-icon>
+              </span>
+            </span>
+          </ion-menu-toggle>
+        </ion-item>
+
+
+        <ion-list-header class="padding-top-sm" style="display: flex; flex-direction: row;">
+          <span>ANALYTICS</span>
+        </ion-list-header>
+
+        <ion-item style="padding-left: 15px;" lines="none">
+          <ion-menu-toggle>
+            <span color="primary" lines="none">
+              <span>
+                <ion-icon name="globe-outline" style="padding-right: 3px;"></ion-icon>
+                By country
+                <ion-icon name="chevron-down-outline" style="padding-top: 3px;" class="ion-float-right"></ion-icon>
+              </span>
+            </span>
+          </ion-menu-toggle>
+        </ion-item>
+
+        <ion-item style="padding-left: 15px;" lines="none">
+          <ion-menu-toggle>
+            <span color="primary" lines="none">
+              <span>
+                <ion-icon name="people-outline" style="padding-right: 3px;"></ion-icon>
+                By students
+                <ion-icon name="chevron-down-outline" style="padding-top: 3px;" class="ion-float-right"></ion-icon>
+              </span>
+            </span>
+          </ion-menu-toggle>
+        </ion-item>
+
+        <ion-item style="padding-left: 15px;" lines="none">
+          <ion-menu-toggle>
+              <span>
+                <ion-icon name="list-outline" style="padding-right: 3px;"></ion-icon>
+                By teams
+              </span>
+              <span class="ion-float-right">
+                <ion-icon name="chevron-down-outline" style="padding-top: 3px;" ></ion-icon>
+              </span>
+          </ion-menu-toggle>
+        </ion-item>
+
+        <ion-item style="padding-left: 15px;" lines="none">
+          <ion-menu-toggle>
+            <span color="primary" lines="none">
+              <span>
+                <ion-icon name="bar-chart-outline" style="padding-right: 3px;"></ion-icon>
+                By skillometer
+                <ion-icon name="chevron-down-outline" style="padding-top: 3px;" class="ion-float-right"></ion-icon>
+              </span>
+            </span>
+          </ion-menu-toggle>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+</ion-app>

@@ -1,0 +1,124 @@
+<ion-content class="ion-no-padding">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size-xl="7.5" size-lg="12" size-md="12" size-xs="12">
+        <ion-slides pager="true" [options]="slideOpts" style="height: 100%;">
+          <ion-slide>
+            <ion-img src="https://wallpaperaccess.com/full/1209562.jpg">
+            </ion-img>
+          </ion-slide>
+          <ion-slide>
+            <ion-img src="https://wallpaperaccess.com/full/1209562.jpg">
+            </ion-img>
+          </ion-slide>
+          <ion-slide>
+            <ion-img src="https://wallpaperaccess.com/full/1209562.jpg">
+            </ion-img>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+
+      <ion-col size-xl="4" offset-xl="0.5" size-lg="12" offset-lg="3" size-md="12" offset-md="2.5" size-xs="12"
+        style="margin-left: 0px;">
+        <ion-row class="padding-vertical padding-horizantal">
+          <ion-button color="primary">Sqorer</ion-button>
+        </ion-row>
+
+        <ion-row style="padding-left: 35px;">
+          <ion-col size="10">
+            <h2>Welcome back !</h2>
+          </ion-col>
+          <ion-col size="10">
+            <p>Sign in to continue to sqorer</p>
+          </ion-col>
+        </ion-row>
+
+        <form #form="ngForm" (ngSubmit)="login(form)">
+
+          <ion-row style="justify-content: start; padding-top: 30px;" class="padding-horizantal">
+            <ion-item class="form-feild">
+              <ion-label position="stacked">email</ion-label>
+              <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
+            </ion-item>
+          </ion-row>
+          <ion-row style="justify-content: start;" class="padding-horizantal">
+            <ion-item class="form-feild">
+              <ion-label position="stacked">password</ion-label>
+              <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
+            </ion-item>
+          </ion-row>
+          <ion-row style="justify-content: start;" class="padding-horizantal"
+            style="padding-top: 10px; margin-left: 40px;">
+
+            <ion-col size-xl="5" size-lg="5" size-md="5" size-xs="5">
+              <ion-row>
+                <ion-col size-xl="1" offset-xl="-1" size-lg="1" offset-lg="-0.5" size-md="1" offset-md="-1" size-xs="1"
+                  offset-xs="-2">
+                  <ion-checkbox size="small"></ion-checkbox>
+                </ion-col>
+                <ion-col size-xl="6" offset-xl="0.5" size-lg="6" offset-lg="0" size-md="6" offset-md="0.5" size-xs="7"
+                  offset-xs="2">
+                  <p style="font-size: smaller;">Remember me</p>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+            <ion-col size-xl="4" offset-xl="1" size-lg="4" offset-lg="-2" size-md="4" offset-md="-1" size-xs="4"
+              offset-xs="2.5">
+              <p style="font-size: small;"><a href="/reset-password">Forgot password?</a></p>
+            </ion-col>
+
+          </ion-row>
+          <ion-row style="justify-content: start;" class="padding-horizantal">
+            <ion-button class="form-feild" color="primary btn-start" type="submit" [disabled]="form.invalid"
+              expand="block">Log in</ion-button>
+          </ion-row>
+
+        </form>
+        <ion-row style="padding-top: 20px;">
+          <ion-col size-xl="3" offset-xl="3.75" size-lg="3" offset-lg="2.25" size-md="3" offset-md="3" size-xs="10"
+            offset-xs="4.5">
+            <p style="font-size: small;">
+              signin using
+            </p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size-xl="1" offset-xl="3.25" size-lg="1" offset-lg="2" size-md="1" offset-md="2" size-xs="1"
+            offset-xs="4">
+            <ion-img style="width: 35px; margin-top: 1px;"
+              src='https://pngmind.com/wp-content/uploads/2019/08/Facebook-Png-Logo.png'>
+            </ion-img>
+          </ion-col>
+          <ion-col size-xl="1" offset-xl="0.25" size-lg="1" offset-lg="-0.5" size-md="1" offset-md="0.25" size-xs="1"
+            offset-xs="0.5">
+            <ion-img style="width: 30px;  margin-top: 4px;"
+              src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9rvbPL6hul0tyA3gOxM39xzr5rzI6ztZSgQ&usqp=CAU'>
+            </ion-img>
+          </ion-col>
+          <ion-col size-xl="1" offset-xl="0.25" size-lg="1" offset-lg="-0.5" size-md="1" offset-md="0.25" size-xs="1"
+            offset-xs="0.5">
+            <ion-img style="width: 25px; margin-top: 6px;"
+              src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png'>
+            </ion-img>
+          </ion-col>
+        </ion-row>
+
+        <ion-row style="padding-top: 20px;">
+          <ion-col size-xl="12" offset-xl="2" size-lg="12" offset-lg="1.5" size-md="12" offset-md="1.75" size-xs="12"
+            offset-xs="2">
+            <p>Don't have an account ? <a href="/register">Signup now</a></p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row style="padding-top: 20px;">
+          <ion-col size-xl="12" offset-xl="3.25" size-lg="12" offset-lg="2" size-md="12" offset-md="2.5" size-xs="10"
+            offset-xs="3.75">
+            <p style="font-size: small;">©Augment Edutech</p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

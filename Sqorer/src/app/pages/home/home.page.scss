@@ -1,0 +1,171 @@
+@import "src/app/app.component.scss";
+
+.header-input {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  border: 1px solid #ffffff;
+  width: 200px;
+  height: fit-content;
+}
+
+.stats {
+  border-radius: 25px;
+  background-color: #c2c4c9;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: 50px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: 120px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.stats-text {
+  margin-top: 30px;
+}
+
+.toolbar {
+  --background-color: transparent;
+  --ion-color-base: transparent !important;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.header-row:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+.header-row:nth-of-type(even) {
+  background-color: #f2f2f2;
+}
+
+.pvt-messages-box-item:nth-of-type(even) {
+  background-color: white;
+}
+
+ion-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+}
+
+ion-grid {
+  height: 100%;
+}
+
+ion-card {
+  width: 300px;
+  background-color: #ffffff;
+  border: 0px;
+  box-shadow: none !important;
+}
+
+ion-slides {
+  height: 100%;
+}
+
+.section-4 {
+  height: fit-content;
+}
+
+@media (max-width: 768px) {
+  /* For mobile phones: */
+
+  .header-input {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 1px solid #ffffff;
+    width: 100px;
+    height: fit-content;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .btn-send {
+    justify-content: center;
+    margin-right: 0px;
+    margin-top: 10px;
+  }
+}
+
+ion-img {
+  border-radius: 50%;
+}
+
+.image-center {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: inherit;
+  object-position: inherit;
+  border-radius: 15%;
+}
+
+.btn-start {
+  --border-radius: 10px;
+}
+
+.btn-send {
+  justify-content: flex-end;
+  margin-right: 100px;
+  margin-top: 10px;
+}
+
+/* Corousel-styles */
+
+// Slider Style START
+.custon-nav {
+  height: 48px;
+  width: 20px;
+  cursor: pointer;
+
+  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.prev-icon-custom {
+  background: url(https://freakyjolly.com/demo/jquery/OwlCarousel2/nav-icon.png)
+    no-repeat scroll 0px 0px;
+}
+.prev-icon-custom.disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.next-icon-custom {
+  background: url(https://freakyjolly.com/demo/jquery/OwlCarousel2/nav-icon.png)
+    no-repeat scroll -32px 0px;
+}
+.next-icon-custom.disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.slider-nav {
+  ion-icon {
+    height: 100%;
+  }
+}
+
+.slide-text {
+  position: absolute;
+  color: white;
+  bottom: 30px;
+}
+
+// Slider Style STOP

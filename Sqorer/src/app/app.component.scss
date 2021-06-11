@@ -13,7 +13,7 @@ ion-split-pane {
   flex-direction: row;
 }
 
-ion-menu-toggle{
+ion-menu-toggle {
   width: 100%;
 }
 h1 {
@@ -57,45 +57,43 @@ ion-button {
   font-size: 16px;
 }
 
-.padding-horizantal{
+.padding-horizantal {
   padding-left: 20px;
   padding-right: 20px;
 }
 
-.padding-top-sm{
+.padding-top-sm {
   padding-top: 10px;
 }
 
-span{
+span {
   color: white;
   font-size: 14px;
 }
 
-.place-align-center{
+.place-align-center {
   display: flex;
   justify-content: center;
   align-content: center;
 }
 
-.hide-sm{
+.hide-sm {
   display: block;
 }
 
-.hide-lg{
+.hide-lg {
   display: none;
 }
 
 @media (max-width: 540px) {
   /* For mobile phones: */
 
-  .hide-sm{
+  .hide-sm {
     display: none;
   }
 
-  .hide-lg{
+  .hide-lg {
     display: block;
   }
 }
-
-
 

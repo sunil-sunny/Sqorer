@@ -1,2 +1,225 @@
-<app-profile-banner [viewButton]="true"></app-profile-banner>
-<app-profile-banner></app-profile-banner>
+<app-header></app-header>
+<ion-content>
+
+    <ion-grid style="width: 100vw;  background-color: #f2f2f2;">
+
+        <ion-row>
+            <ion-col size-xl="3" size-lg="5" offset-lg="0" size-md="10" offset-md="1" size-sm="10" size-xs="10">
+
+                <ion-card style="width: 450px;" class="ion-no-padding">
+                    <ion-card-header class="ion-no-padding">
+                        <ion-card-title>
+                            <ion-img class="profile-header"
+                                src='https://directlinedev.com/media/cases/woodwell/clear/great_background_1.wide.png'>
+                            </ion-img>
+                        </ion-card-title>
+                        <ion-card-subtitle>
+                            <ion-row style="background-color: white;">
+                                <ion-col size-xl="5" offset-xl="0.25" size-lg="4" size-md="4">
+
+                                    <ion-row>
+                                        <ion-card class="profile-img">
+                                            <ion-img style="height: 100%;"
+                                                src='https://image.freepik.com/free-vector/profile-icon-male-avatar-hipster-man-wear-headphones_48369-8728.jpg'>
+                                            </ion-img>
+                                        </ion-card>
+                                    </ion-row>
+                                    <ion-row>
+                                        <span style="font-size: small; font-weight: bold; margin-left: 10px;">Satya Kumat Itekela</span>
+                                    </ion-row>
+                                    <ion-row>
+                                        <span style="font-size: smaller; margin-left: 10px;">Teacher</span>
+                                    </ion-row>
+                                </ion-col>
+                                <ion-col size-xl="1.5" offset-xl="0.25" size-lg="2" size-md="3" offset-md="0.5">
+
+                                    <ion-row>
+                                        <span style="font-weight: bold;">10</span>
+                                    </ion-row>
+                                    <ion-row>
+                                        <span>Teams</span>
+                                    </ion-row>
+                                    <ion-row *ngIf="viewButton">
+                                        <ion-button>View Profile <ion-icon name="arrow-forward-outline"></ion-icon>
+                                        </ion-button>
+                                    </ion-row>
+
+                                </ion-col>
+                                <ion-col size-xl="1.5" offset-xl="2" size-lg="2" offset-lg="2" size-md="3"
+                                    offset-md="1">
+                                    <ion-row>
+                                        <span style="font-weight: bold;">87</span>
+                                    </ion-row>
+                                    <ion-row>
+                                        <span>Students</span>
+                                    </ion-row>
+                                </ion-col>
+                            </ion-row>
+                        </ion-card-subtitle>
+                    </ion-card-header>
+
+                </ion-card>
+
+            </ion-col>
+            <ion-col size-xl="3" offset-xl="0.75" size-lg="5" size-md="10" offset-md="1" size-sm="10" size-xs="10">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <p> Personal Information</p>
+                            <ion-icon name="pencil-outline"></ion-icon>
+                        </ion-card-title>
+                        <ion-card-subtitle style="font-size: small;">
+                            <span>Hello! I am Satya. I am currently working as full
+                                stack develer
+                                at Canada Revenue Agency</span>
+                        </ion-card-subtitle>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col size-xl="5">
+                                    <p>Full name:</p>
+                                </ion-col>
+                                <ion-col size-xl="5">
+                                    <span>Satya Kumar Itekela</span>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size-xl="5">
+                                    <p>Mobile:</p>
+                                </ion-col>
+                                <ion-col size-xl="5">
+                                    <span>902-209-8090</span>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size-xl="5">
+                                    <p>E-mail:</p>
+                                </ion-col>
+                                <ion-col size-xl="5">
+                                    <span>sai.menta@dal.ca</span>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+                                <ion-col size-xl="5">
+                                    <p>Location:</p>
+                                </ion-col>
+                                <ion-col size-xl="5">
+                                    <span>Halifax, Canada</span>
+                                </ion-col>
+                            </ion-row>
+
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+            <ion-col size-xl="3" offset-xl="0.5" size-lg="5" size-md="10" offset-md="1" size-sm="10" size-xs="10">
+                <ion-card style="width: fit-content;">
+                    <ion-card-header>
+                        <ion-card-title style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <p> Edit details</p>
+                        </ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content style="height: fit-content;">
+                        <form #form="ngForm" (ngSubmit)="login(form)">
+
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">First name</ion-label>
+                                    <ion-input type="text" name="firstName" required></ion-input>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Last name</ion-label>
+                                    <ion-input type="text" name="lastName" required></ion-input>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Contact number</ion-label>
+                                    <ion-input type="text" name="contactNumber" required></ion-input>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Email id</ion-label>
+                                    <ion-input type="email" name="email" required></ion-input>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">City</ion-label>
+                                    <ion-input type="text" name="city" required></ion-input>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Country</ion-label>
+                                    <ion-input type="text" name="country" [(ngModel)]="password" required></ion-input>
+                                </ion-item>
+                            </ion-row>
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">About me</ion-label>
+                                    <ion-textarea></ion-textarea>
+                                </ion-item>
+                            </ion-row>
+
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">School</ion-label>
+                                    <ion-input type="text" name="school"></ion-input>
+                                </ion-item>
+                            </ion-row>
+
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Certifications</ion-label>
+                                    <ion-input type="text" name="certifications"></ion-input>
+                                </ion-item>
+                            </ion-row>
+
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Affiliations</ion-label>
+                                    <ion-input type="text" name="affiliations"></ion-input>
+                                </ion-item>
+                            </ion-row>
+
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Experience</ion-label>
+                                    <ion-input type="text" name="experience"></ion-input>
+                                </ion-item>
+                            </ion-row>
+
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Facebook Link</ion-label>
+                                    <ion-input type="text" name="fbLink"></ion-input>
+                                </ion-item>
+                            </ion-row>
+
+                            <ion-row class="padding-horizantal">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Linkedin Link</ion-label>
+                                    <ion-input type="text" name="linkedInLink"></ion-input>
+                                </ion-item>
+                            </ion-row>
+
+                            <ion-row class="padding-horizantal">
+                                <ion-button class="form-feild" color="primary btn-start" type="submit"
+                                    [disabled]="form.invalid" expand="block">Save</ion-button>
+                            </ion-row>
+                        </form>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>

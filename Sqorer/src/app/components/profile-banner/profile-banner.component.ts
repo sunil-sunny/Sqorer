@@ -12,6 +12,8 @@ export class ProfileBannerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log('profile');
+   }
 
 }

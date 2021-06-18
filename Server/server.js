@@ -14,7 +14,7 @@ const config = require("config");
 const User = require("./models/user");
 
 
-const gameServices = require('./routes/middleware/game'); 
+const gameServices = require('./routes/middleware/game');
 
 //import socket Io
 
@@ -44,8 +44,8 @@ connectDB();
 //Coockie Session
 
 app.use(cookieSession({
-  name: 'sqorer',
-  keys: ['key1', 'key2']
+    name: 'sqorer',
+    keys: ['key1', 'key2']
 }));
 
 
@@ -66,22 +66,24 @@ app.use(passport.session());
 app.get('google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get('google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/good');
-  }
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/good');
+    }
 );
 
 // Apis
 app.use("/api/user", require('./routes/api/user'));
 app.use("/api/auth", require('./routes/api/auth'));
 app.use("/api/games", require('./routes/api/game'));
-app.use("/api/game",  new gameServices())
+app.use("/api/game", new gameServices())
 app.use("/api/exercice", require('./routes/api/exercice'));
 app.use("/api/image", require('./routes/api/upload'));
 app.use("/api/payment", require('./routes/api/payment'));
 app.use("/api/team", require('./routes/api/team'));
 app.use("/uploads", express.static("uploads"));
+app.use("/api/teacher", require('./routes/api/teacherRoute'));
+app.use("/api/parent", require('./routes/api/parentRoute'));
 
 //
 app.use(express.static('client/build'));
@@ -95,7 +97,7 @@ app.on('connection', conn => app.channel('stream').join(conn));
 // Publish events to stream
 app.publish(data => app.channel('stream'));
 
-let PORT = process.env.PORT || 8082; 
+let PORT = process.env.PORT || 8082;
 
 app.listen(PORT)
     .on('listening', () =>

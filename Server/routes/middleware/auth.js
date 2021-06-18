@@ -1,16 +1,27 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const User = require("../../models/user");
 
-module.exports = function(req, res, next) {
-	//get the toke from the header
-	const token = req.header('x-auth-token');
-	if (!token) return res.status(401).json({ msg:  'Access denied.' });
+const auth = async (req, res, next) => {
+    try {
 
-	try {
-		const decoded = jwt.verify(token, config.get('jwtSecret'));
-		req.user = decoded;
-		next();
-	} catch (error) {
-		res.status(401).json({ msg: 'Access  denied.' });
-	}
-};
+        const token = req.header('Auth').replace('Bearer', '');
+        const decoded = jwt.verify(token, config.get('jwtSecret'))
+        const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
+        if (!user) {
+            throw new error()
+        } else {
+            req.token = token
+            req.user = user
+            next()
+        }
+
+    } catch (e) {
+        res.status(401).send({
+            msg: 'Invalid credentials'
+        })
+    }
+}
+
+
+module.exports = auth

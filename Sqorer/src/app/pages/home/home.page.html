@@ -1,59 +1,62 @@
 <ion-header>
     <ion-grid>
-        <ion-row class="toolbar">
-            <ion-col size-xl="3" offset-xl="0.75" size-lg="3.5" offset-lg="-1.5" size-xs="4" offset-xs="1.5"
-                size-md="4.25" offset-md="-1.5" class="header-col hide-sm">
+        <ion-row class="toolbar ion-justify-content-between">
+            <ion-col size-xl="1.25" size-lg="3.25" size-md="4.5" class="ion-hide-md-down">
                 <ion-title class="ion-no-border">
                     <ion-button>Sqorer</ion-button>
                 </ion-title>
             </ion-col>
 
-            <ion-col size-xs="2" offset-xs="0" class="hide-lg">
+            <ion-col size-sm="1.25" size="1.25" class="ion-hide-md-up">
                 <ion-icon name="finger-print-outline" size="large" color="primary"></ion-icon>
             </ion-col>
 
-            <ion-col size-xl="2" offset-xl="-0.75" size-lg="2.5" size-xs="8" offset-xs="-1" size-md="2.5"
-                class="ion-padding-vertical">
+            <ion-col size-xl="4" size-lg="3" size-sm="7.75" size="7.75" size-md="4" class="ion-padding-vertical" style="display: flex;
+                justify-content: flex-end;">
                 <ion-item style="width: fit-content;" lines="none" class="header-input">
                     <ion-input placeholder="enter game code"></ion-input>
                     <ion-icon name="play" color="primary"></ion-icon>
                 </ion-item>
             </ion-col>
-            <ion-col size-xl="2" size-lg="1.75" offset-xl="0.75" size-xs="12" size-md="1.75" class="hide-sm">
-                <p style="width: fit-content; margin-top: 10px; font-weight: bold;">
-                    Skillometer
-                </p>
-            </ion-col>
+            <ion-col size-xl="6" size-lg="5.75" size-md="3.5" size-sm="3" size="3">
+                <ion-row class="ion-justify-content-end">
+                    <ion-col size-xl="2" size-lg="3" size-xs="12" size-md="1.75" class="ion-hide-lg-down">
+                        <p style="width: fit-content; margin-top: 10px; font-weight: bold;">
+                            Skillometer
+                        </p>
+                    </ion-col>
 
-            <ion-col size-xl="1.5" size-lg="1.5" size-xs="12" size-md="1.5" offset-lg="-0.5" class="hide-sm">
-                <p style="width: fit-content; margin-top: 10px; font-weight: bold;">
-                    About us
-                </p>
-            </ion-col>
+                    <ion-col size-xl="2" size-lg="3" size-xs="12" size-md="1.5" class="ion-hide-lg-down">
+                        <p style="width: fit-content; margin-top: 10px; font-weight: bold;">
+                            About us
+                        </p>
+                    </ion-col>
 
-            <ion-col size-xl="1.5" size-lg="1.5" size-xs="12" size-md="1.5" class="header-col hide-sm">
-                <p style="width: fit-content; margin-top: 10px; font-weight: bold;" routerLink="/login">
-                    Sign in
-                </p>
-            </ion-col>
+                    <ion-col size-xl="2" size-lg="3" size-xs="12" size-md="6" class="ion-hide-md-down">
+                        <p style="width: fit-content; margin-top: 10px; font-weight: bold;" routerLink="/login">
+                            Sign in
+                        </p>
+                    </ion-col>
 
-            <ion-col size-xs="1.5" offset-xs="1" class="hide-lg">
-                <ion-icon name="person" color="primary" size="large" (click)="openPopOver($event)"></ion-icon>
-            </ion-col>
+                    <ion-col size-sm="6" size="6" class="ion-hide-md-up">
+                        <ion-icon name="person" color="primary" size="large" (click)="openPopOver($event)"></ion-icon>
+                    </ion-col>
 
-            <ion-col size-xl="1.5" size-lg="1.75" offset-lg="-0.25" size-xs="12" size-md="1.75" offset-md="-0.25"
-                class="header-col hide-sm">
-                <ion-button (click)="goToSignUpPage()">SIGN UP</ion-button>
+                    <ion-col size-xl="2" size-lg="3" size-xs="12" size-md="6" class="ion-hide-md-down">
+                        <ion-button (click)="goToSignUpPage()">SIGN UP</ion-button>
+                    </ion-col>
+
+                </ion-row>
             </ion-col>
 
         </ion-row>
     </ion-grid>
 </ion-header>
 
-<ion-content class="ion-no-padding" [fullscreen]="true">
+<ion-content class="ion-no-padding" [fullscreen]="false" (ionChange)="changeIon()">
     <ion-grid class="ion-no-padding">
 
-        <!--Header-->
+
 
         <ion-row class="header-row">
             <ion-col size="12">

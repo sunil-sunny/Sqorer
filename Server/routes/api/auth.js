@@ -8,12 +8,12 @@ const { check, validationResult } = require("express-validator");
 const User = require("../../models/user");
 const Code = require("../../models/code");
 const signInValidation = require('../../validations/signIn');
+const auth = require("../middleware/auth");
 
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
-
 
 router.post('/google', async (req, res) => {
   try {
@@ -166,21 +166,11 @@ router.put('/change-password', async (req, res) => {
 })
 
 //Dispatch token to get the id of the user.
-router.put("/", async (req, res) => {
-  try {
-    const { token } = req.body;
-    console.log(token)
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
-    const user = await User.findById(decoded.id)
-      .select("-password")
-    res.json(user);
-  } catch (error) {
-    // console.log(error);
-    return res.json({
-      msg: `Server error fething user from database ${error}`,
-    });
-  }
+router.get("/getUser", auth, async (req, res) => {
+
+  res.send(req.user);
 });
+
 
 //Sign In
 router.post("/", async (req, res) => {
@@ -190,33 +180,34 @@ router.post("/", async (req, res) => {
   const { email, password } = req.body;
   console.log(`Trying to login as ${email}`);
   try {
-    let user = await User.findOne({ email });
-    if (!user) return res.json({ msg: `This email doesn't exist in our database` });
-    const isMatch = await bcrypt.compare(password, user.password);
-    console.log(isMatch)
-    if (!isMatch)
-      return res.json({ msg: "Invalid Credentials, Please try again" });
-    const payload = {
-      id: user.id,
-    };
-    jwt.sign(
-      payload,
-      config.get("jwtSecret"),
-      {
-        expiresIn: 360000,
-      },
-      (err, token) => {
-        if (err) throw err;
-        return res.json({ token: token });
-      }
-    );
-  } catch (error) {
-    console.log(`${error}`);
-    return res
-      .status(500)
-      .json({ msg: `Server error` });
+    let user = await User.findByCredentials(email, password);
+    let token = await user.getAuthToken();
+    res.status(200).json({ token })
+  } catch (e) {
+    console.log(e)
+    res.status(400).json({
+      msg: e.message
+    })
   }
 }
 );
+
+router.post("/logout", async (req, res) => {
+
+  try {
+    req.user.tokens = req.user.tokens.filter((token) => {
+
+      return token.token !== req.token
+    })
+    await req.user.save();
+    res.status(200).send({
+      "success": "true"
+    })
+  } catch (e) {
+    res.status(500).send('unable to logout')
+  }
+
+});
+
 
 module.exports = router;

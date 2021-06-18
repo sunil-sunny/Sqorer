@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
 
   slideOptsTwo = {
     initialSlide: 1,
-    slidesPerView: 3,
+    slidesPerView:  3,
     shouldLockSwipes: 1,
     loop: true,
     centeredSlides: true,
@@ -97,6 +97,10 @@ export class HomePage implements OnInit {
       case 901 <= innerWidth:
         return 3;
     }
+  }
+
+  changeIon(){
+    console.log('ion changed');
   }
 
   //Move to Next slide

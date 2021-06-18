@@ -4,6 +4,8 @@ ion-split-pane {
   --side-width: 60px;
 }
 
+
+
 .custom {
   --width: 100px;
 }
@@ -28,6 +30,12 @@ h2 {
   font-weight: bold;
   color: #14a800;
   font-size: 20;
+}
+
+h3 {
+  font-family: Poppins !important;
+  color: #14a800;
+  font-size: 16;
 }
 
 h4 {
@@ -67,7 +75,6 @@ ion-button {
 }
 
 span {
-  color: white;
   font-size: 14px;
 }
 
@@ -96,4 +103,25 @@ span {
     display: block;
   }
 }
+
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 

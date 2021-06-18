@@ -1,0 +1,104 @@
+<app-header></app-header>
+
+<ion-content>
+
+  <ion-grid class="ion-padding" style="background-color: #F2F2F2; height: 100vh;">
+
+    <ion-row style="height: fit-content; width: fi;" class="ion-justify-content-center">
+      <ion-col size-xl="7" size-sm="10" size-xs="10" style="height: fit-content;">
+        <!--  lable row -->
+
+        <ion-card>
+          <ion-row style="padding: 15px;">
+            <ion-item-divider>
+              <ion-col size-xl="1" size-sm="1">
+                <h3>#</h3>
+              </ion-col>
+
+              <ion-col size-xl="1.5" class=ion-hide-md-down>
+                <h3>Avatar</h3>
+              </ion-col>
+
+              <ion-col size-xl="1.5" size-sm="3">
+                <h3>Child</h3>
+              </ion-col>
+
+              <ion-col size-xl="1.5" class=ion-hide-md-down>
+                <h3>Country</h3>
+              </ion-col>
+
+              <ion-col size-xl="3" class=ion-hide-md-down>
+                <h3>email</h3>
+              </ion-col>
+
+              <ion-col size-xl="1.5" size-sm="4">
+                <h3>Active <ion-icon name="caret-down-outline"></ion-icon>
+                </h3>
+              </ion-col>
+            </ion-item-divider>
+          </ion-row>
+
+          <ion-list>
+            <!-- students data -->
+            <ion-row style="height: fit-content;" *ngFor="let child of children; let i=index">
+              <ion-item-divider>
+                <ion-col size-xl="1" size-sm="1">
+                  <span>{{i+1}}</span>
+                </ion-col>
+
+                <ion-col size-xl="1.5" class=ion-hide-md-down>
+                  <span>
+                    <ion-card style="border-radius: 50%;height: 35px;
+                width: 35px;">
+                      <ion-header>
+                        <ion-img src={{child.profile}} alt={{child.firstname}}>
+                        </ion-img>
+                      </ion-header>
+                    </ion-card>
+                  </span>
+                </ion-col>
+
+                <ion-col size-xl="1.5" size-sm="3">
+                  <span>{{child.firstname}}</span>
+                </ion-col>
+
+                <ion-col size-xl="1.5" class=ion-hide-md-down>
+                  <span>{{child.country}}</span>
+                </ion-col>
+
+                <ion-col size-xl="3" class=ion-hide-md-down>
+                  <span>{{child.email}}</span>
+                </ion-col>
+
+                <ion-col size-xl="1.5" size-sm="4">
+                  <span>
+                    <ion-icon name="pencil-outline" color="primary"></ion-icon>
+                  </span>
+                </ion-col>
+              </ion-item-divider>
+            </ion-row>
+          </ion-list>
+        </ion-card>
+
+      </ion-col>
+      <ion-col size-xl="4" size-sm="10" size-xs="10">
+        <!-- [(ngModel)]="addEmail" -->
+        <form #form="ngForm" (ngSubmit)="addChild(form)">
+          <ion-row class="ion-justify-content-center" style="padding-top: 50px;">
+
+            <ion-item>
+              <ion-input type="text" name="studentEmail" [(ngModel)]="studentEmail" placeholder="Enter student email"
+                required></ion-input>
+            </ion-item>
+          </ion-row>
+          <ion-row class="ion-justify-content-center ion-padding-vertical">
+            <ion-button color="primary" type="submit" [disabled]="form.invalid" expand="block">Add Child</ion-button>
+          </ion-row>
+
+        </form>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

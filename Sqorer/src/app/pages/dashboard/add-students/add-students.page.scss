@@ -1,0 +1,44 @@
+@import "src/app/app.component.scss";
+
+ion-row {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+ion-list {
+  overflow: hidden;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+ion-item {
+  border: 1px solid #888;
+  border: 50%;
+  border-radius: 50px;
+  height: 45px;
+}
+
+ion-input {
+  text-align: center;
+  width: 300px;
+}

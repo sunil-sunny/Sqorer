@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,8 +9,8 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
 
-  //url: any = 'http://localhost:8082/api/';
-  url: any = 'http://test-service.sqorer.com/api/';
+  url: any = 'http://localhost:8082/api/';
+  //url: any = 'http://test-service.sqorer.com/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -25,14 +26,28 @@ export class AuthService {
     return this.http.post<any>(this.url + 'auth/', body);
   }
 
+  saveUser(userDetails): Observable<any> {
+
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + localStorage.getItem('token')
+
+    };
+    const reqheaders = new HttpHeaders(headerData);
+
+    return this.http.put<any>(this.url + 'user/', userDetails, { headers: reqheaders });
+  }
+
   getUser(): Observable<any> {
 
-    const token = localStorage.getItem('token');
-    const body = {
-      token
-    };
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + localStorage.getItem('token')
 
-    return this.http.put<any>(this.url + 'auth/', body);
+    };
+    const reqheaders = new HttpHeaders(headerData);
+
+    return this.http.get<any>(this.url + 'auth/getUser', { headers: reqheaders });
   }
 
   registerUser(registerDetails): Observable<any> {

@@ -1,9 +1,9 @@
 <ion-header [translucent]="false">
   <ion-grid>
-    <ion-toolbar>
+    <ion-toolbar style="height: 70px;">
 
-      <ion-row>
-        <ion-col style="margin-top: 10px;" size-xl="0.5" size-lg="0.5" size-md="0.5" size-xs="0.5">
+      <ion-row class="ion-no-padding" style="height: fit-content;">
+        <ion-col style="margin-top: 10px;" size="1.5" size-xl="0.5" size-lg="0.75" size-md="0.75" size-sm="1.5">
           <ion-buttons class="ion-no-padding">
             <ion-menu-button style="margin-top: 0px;">
 
@@ -11,52 +11,52 @@
           </ion-buttons>
         </ion-col>
 
-        <ion-col style="margin-top: 10px;" size-xl="1.5" size-lg="2" offset-xl="0.5" offset-lg="1" size-md="2"
-          offset-md="0.5" class="hide-sm hide-md">
+        <ion-col style="margin-top: 10px;" size="1.75" size-xl="1.75" size-lg="2.75" size-md="3.25"
+          class="ion-hide-md-down">
           <ion-searchbar inputmode="text"></ion-searchbar>
         </ion-col>
 
-        <ion-col size-xl="1" offset-xl="0.5" size-lg="2" size-md="2" offset-md="1.5" size-xs="2" offset-xs="1"
-          style="margin-top: 20px;" class="hide-sm">
+        <ion-col size="1" size-xl="1" size-lg="2" size-md="2" size-sm="2" style="margin-top: 20px;"
+          class="ion-hide-md-down">
           <span style="color: black; font-size: small;">Quick tasks <ion-icon name="chevron-down-outline"
               style="font-size: small;"></ion-icon>
           </span>
         </ion-col>
 
 
-        <ion-col size-xl="5" offset-xl="3" size-lg="5" offset-lg="0" size-md="5.5" offset-md="0" size-xs="8"
-          offset-xs="3" style="margin-top: 5px;">
-          <ion-row class="padding-top-sm">
-            <ion-col size-xl="1" offset-xl="3.5" size-lg="1" offset-lg="3" size-md="1" offset-md="3" size-xs="1"
-              class="hide-sm">
+        <ion-col size="10.5" size-xl="8.75" size-lg="6.5" size-md="6" size-sm="10.5" style="margin-top: 5px;">
+          <ion-row class="padding-top-sm" style="display: flex;
+          justify-content: flex-end;">
+            <ion-col size-xl="0.5" size-lg="1" size-md="1.25" size-sm="1" size="1" class="ion-hide-md-down">
               <ion-icon name="grid-outline"></ion-icon>
             </ion-col>
 
-            <ion-col size-xl="1" size-lg="1" size-md="1" offset-md="0.25" size-xs="1" class="hide-sm">
+            <ion-col size-xl="0.5" size-lg="1" size-md="1.25" size-sm="1" size="1" class="ion-hide-md-down">
               <ion-icon name="scan-outline"></ion-icon>
             </ion-col>
 
-            <ion-col size-xl="1" size-lg="1" size-md="1" offset-md="0.25" size-xs="1" offset-xs="6">
+            <ion-col size-xl="0.5" size-lg="1" size-md="1.25" size-sm="1.75" size="1.75">
               <ion-icon name="notifications-outline"></ion-icon>
             </ion-col>
 
-            <ion-col size-xl="1" size-lg="1" size-md="1" offset-md="0.25" class="hide-sm">
-              <ion-img src='https://www.shareicon.net/data/512x512/2016/07/26/802043_man_512x512.png' alt='SS'
-                style="border-radius: 50px; height: 25px;">
-              </ion-img>
-            </ion-col>
-
-            <ion-col size-xl="2" size-lg="2" size-md="2.5" offset-md="0.25" size-xs="1">
-              <span class="hide-sm" (click)="openProfilePopOver($event)">
-                {{firstName}} <ion-icon name="chevron-down-outline" size="small" style="position: absolute; top: 5px;">
+            <ion-col size-xl="1.5" size-lg="3" size-md="4" size-sm="3" size="3"
+              style="display: flex; justify-content: center;" (click)="openProfilePopOver($event)">
+              <ion-card style="border-radius: 50%;height: 30px;
+              width: 30px;" class="ion-no-padding ion-no-margin">
+                <ion-header>
+                  <ion-img src={{profilePic}} alt="A">
+                  </ion-img>
+                </ion-header>
+              </ion-card>
+              <span class="hide-sm" class="ion-text-wrap" style="display: flex;padding-left: 10px;
+                padding-top: 5px;">
+                <span class="ion-hide-md-down"> {{firstName}}</span>
+                <ion-icon name="chevron-down-outline" size="small">
                 </ion-icon>
               </span>
             </ion-col>
 
-            <ion-col size-xs="1" class="hide-lg" (click)="openProfilePopOver($event)">
-              <ion-icon name="person"></ion-icon>
-            </ion-col>
-            <ion-col size-xl="1" size-lg="1" size-md="1" offset-md="0.25" size-xs="1" offset-xs="1">
+            <ion-col size-xl="0.5" size-lg="1" size-md="1.25" size-sm="1" size="1.75">
               <ion-icon name="settings-outline"></ion-icon>
             </ion-col>
           </ion-row>

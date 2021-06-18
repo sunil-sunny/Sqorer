@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const config = require("config");
 const User = require("../../models/user");
 const signUpValidation = require("../../validations/signUp");
-
+const auth = require("../middleware/auth");
+const TeacherStudent = require('../../models/teacher-student');
 
 
 //Change user password
@@ -39,11 +38,9 @@ router.put('/change-password/:id', async (req, res) => {
 })
 
 //Add more information for user
-router.put('/:id', async (req, res) => {
+router.put('/', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user)
-      return res.status(404).json({ msg: `We can't find any user, Please sign out<br>Then sign in..<br>Sorry for this issue.` });
+    const user = req.user;
     user.set(req.body);
     await user.save();
     console.log(req.body);
@@ -70,55 +67,30 @@ router.get('/', async (req, res) => {
   }
 })
 
-
 //Sign up
 router.post("/", async (req, res) => {
+
+  const { isValid, errors } = signUpValidation(req.body);
+  if (!isValid)
+    return res.status(404).json({ errors: errors });
+  let { firstname, lastname, email, password, userType } = req.body;
+  let user = await User.findOne({ email });
+  if (user)
+    return res.json({ msg: "Email is already registered" });
   try {
-    const { isValid, errors } = signUpValidation(req.body);
-    console.log(errors);
-    if (!isValid)
-      return res.status(404).json({ errors: errors });
-    let { firstname, lastname, email, password, userType } = req.body;
-    let user = await User.findOne({ email });
-    if (user)
-      return res.json({ msg: "Email is already registered" });
-
-    user = await User.findOne({ email });
-
-    const salt = await bcrypt.genSalt(10);
-    password = await bcrypt.hash(password, salt);
-
+    const hashedPassword = await bcrypt.hash(password, 8);
+    console.log(hashedPassword);
     let lastLogin = new Date();
     const isOnline = true;
-
-    user = new User({ firstname, lastname, email, password, userType, lastLogin, isOnline });
-
-    await user.save();
-
-    // Creating  payload
-    const payload = {
-      id: user.id,
-    };
-
-    //return token
-    jwt.sign(
-      payload,
-      config.get("jwtSecret"),
-      {
-        expiresIn: 360000,
-      },
-      (err, token) => {
-        if (err)
-          return res.json({
-            msg: `Error, can't create a new token ${err}`,
-          });
-        return res.json({ token: token });
-      }
-    );
-  } catch (error) {
-    console.log(`${error}`);
-    return res.json({ msg: `Server error ${error}` });
+    const userModel = new User({ firstname, lastname, email, password: hashedPassword, userType, lastLogin, isOnline });
+    await userModel.save();
+    const user = await User.findByCredentials(email, password);
+    const token = await user.getAuthToken();
+    res.status(200).json({ token });
+  } catch (e) {
+    res.status(400).json({ msg: e.message })
   }
+
 });
 
 router.post('/google', async (req, res) => {

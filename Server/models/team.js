@@ -1,23 +1,38 @@
 const mongoose = require("mongoose");
 
 const teamSchema = mongoose.Schema({
-    owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
-    },
+
     name: {
         type: String,
+        require: true
     },
-    profile: {
+    avatar: {
         type: String
+    },
+    teacherId: {
+        type: String,
+        require: true
     },
     members: [
         {
             email: {
-                type: String
+                type: String,
+                required: true
             }
         }
     ]
 });
+
+teamSchema.methods.toJSON = function () {
+    var obj = this.toObject();
+    return obj;
+}
+
+teamSchema.methods.addMember = async function (email) {
+    const team = this;
+    team.students = team.members.concat({ email });
+    await team.save();
+    return email;
+}
 
 module.exports = Team = mongoose.model("team", teamSchema);

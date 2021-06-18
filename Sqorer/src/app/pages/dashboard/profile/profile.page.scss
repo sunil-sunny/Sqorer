@@ -3,6 +3,20 @@ ion-card {
   height: fit-content;
 }
 
+.prof-header-card{
+  width: 450px;
+  height: fit-content;
+}
+
+@media (max-width: 540px) {
+  /* For mobile phones: */
+
+  .prof-header-card{
+    width: 100vw;
+    height: fit-content;
+  }
+}
+
 p {
   font-weight: bold;
 }
@@ -14,7 +28,6 @@ p {
 
 .profile-header {
   display: block;
-  width: 450px;
   height: 119px;
   object-fit: inherit;
   object-position: inherit;

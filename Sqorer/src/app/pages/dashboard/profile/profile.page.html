@@ -3,35 +3,45 @@
 
     <ion-grid style="width: 100vw;  background-color: #f2f2f2;">
 
-        <ion-row>
-            <ion-col size-xl="3" size-lg="5" offset-lg="0" size-md="10" offset-md="1" size-sm="10" size-xs="10">
+        <ion-row class="ion-justify-content-center">
+            <ion-col size-xl="3.65" size-lg="5.5" size-md="10" size-sm="12" size-sm="12">
 
-                <ion-card style="width: 450px;" class="ion-no-padding">
+                <ion-card class="ion-no-padding prof-header-card">
                     <ion-card-header class="ion-no-padding">
-                        <ion-card-title>
-                            <ion-img class="profile-header"
-                                src='https://directlinedev.com/media/cases/woodwell/clear/great_background_1.wide.png'>
-                            </ion-img>
-                        </ion-card-title>
+
+                        <ion-row>
+                            <ion-col size-sm="12" size="12">
+                                <ion-card-title>
+                                    <ion-img class="profile-header"
+                                        src='https://directlinedev.com/media/cases/woodwell/clear/great_background_1.wide.png'>
+                                    </ion-img>
+                                </ion-card-title>
+                            </ion-col>
+                        </ion-row>
+
+
                         <ion-card-subtitle>
-                            <ion-row style="background-color: white;">
-                                <ion-col size-xl="5" offset-xl="0.25" size-lg="4" size-md="4">
+                            <ion-row style="background-color: white;" class="ion-justify-content-between">
+                                <ion-col size-xl="5" size-lg="5" size-md="4" size-sm="4" size="4">
 
                                     <ion-row>
                                         <ion-card class="profile-img">
-                                            <ion-img style="height: 100%;"
-                                                src='https://image.freepik.com/free-vector/profile-icon-male-avatar-hipster-man-wear-headphones_48369-8728.jpg'>
-                                            </ion-img>
+                                            <ion-header>
+                                                <ion-img src={{profile}} alt={{firstname}}>
+                                                </ion-img>
+                                            </ion-header>
                                         </ion-card>
                                     </ion-row>
                                     <ion-row>
-                                        <span style="font-size: small; font-weight: bold; margin-left: 10px;">Satya Kumat Itekela</span>
+                                        <span
+                                            style="font-size: small; font-weight: bold; margin-left: 10px;">{{firstname}}
+                                            {{lastname}}</span>
                                     </ion-row>
                                     <ion-row>
-                                        <span style="font-size: smaller; margin-left: 10px;">Teacher</span>
+                                        <span style="font-size: smaller; margin-left: 10px;">{{userType}}</span>
                                     </ion-row>
                                 </ion-col>
-                                <ion-col size-xl="1.5" offset-xl="0.25" size-lg="2" size-md="3" offset-md="0.5">
+                                <ion-col size-xl="3" size-lg="3.5" size-md="3" size-sm="4" size="4">
 
                                     <ion-row>
                                         <span style="font-weight: bold;">10</span>
@@ -45,8 +55,7 @@
                                     </ion-row>
 
                                 </ion-col>
-                                <ion-col size-xl="1.5" offset-xl="2" size-lg="2" offset-lg="2" size-md="3"
-                                    offset-md="1">
+                                <ion-col size-xl="3" size-lg="3.5" size-md="3" size-sm="4" size="4">
                                     <ion-row>
                                         <span style="font-weight: bold;">87</span>
                                     </ion-row>
@@ -61,7 +70,7 @@
                 </ion-card>
 
             </ion-col>
-            <ion-col size-xl="3" offset-xl="0.75" size-lg="5" size-md="10" offset-md="1" size-sm="10" size-xs="10">
+            <ion-col size-xl="3.25" size-lg="5.5" size-md="10" size-sm="12" size="12">
                 <ion-card>
                     <ion-card-header>
                         <ion-card-title style="display: flex; flex-direction: row; justify-content: space-between;">
@@ -69,9 +78,7 @@
                             <ion-icon name="pencil-outline"></ion-icon>
                         </ion-card-title>
                         <ion-card-subtitle style="font-size: small;">
-                            <span>Hello! I am Satya. I am currently working as full
-                                stack develer
-                                at Canada Revenue Agency</span>
+                            <span>{{title}}</span>
                         </ion-card-subtitle>
                     </ion-card-header>
 
@@ -82,7 +89,7 @@
                                     <p>Full name:</p>
                                 </ion-col>
                                 <ion-col size-xl="5">
-                                    <span>Satya Kumar Itekela</span>
+                                    <span>{{firstname}} {{lastname}}</span>
                                 </ion-col>
                             </ion-row>
                             <ion-row>
@@ -90,7 +97,7 @@
                                     <p>Mobile:</p>
                                 </ion-col>
                                 <ion-col size-xl="5">
-                                    <span>902-209-8090</span>
+                                    <span>{{phone}}</span>
                                 </ion-col>
                             </ion-row>
                             <ion-row>
@@ -98,7 +105,7 @@
                                     <p>E-mail:</p>
                                 </ion-col>
                                 <ion-col size-xl="5">
-                                    <span>sai.menta@dal.ca</span>
+                                    <span>{{email}}</span>
                                 </ion-col>
                             </ion-row>
 
@@ -107,7 +114,7 @@
                                     <p>Location:</p>
                                 </ion-col>
                                 <ion-col size-xl="5">
-                                    <span>Halifax, Canada</span>
+                                    <span>{{city}}, {{country}}</span>
                                 </ion-col>
                             </ion-row>
 
@@ -116,7 +123,7 @@
                 </ion-card>
             </ion-col>
 
-            <ion-col size-xl="3" offset-xl="0.5" size-lg="5" size-md="10" offset-md="1" size-sm="10" size-xs="10">
+            <ion-col size-xl="4.5" size-lg="7" size-md="10" size-sm="10" size-xs="10">
                 <ion-card style="width: fit-content;">
                     <ion-card-header>
                         <ion-card-title style="display: flex; flex-direction: row; justify-content: space-between;">
@@ -124,90 +131,120 @@
                         </ion-card-title>
                     </ion-card-header>
                     <ion-card-content style="height: fit-content;">
-                        <form #form="ngForm" (ngSubmit)="login(form)">
+                        <form #form="ngForm" (ngSubmit)="saveUser(form)">
 
                             <ion-row class="padding-horizantal">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">First name</ion-label>
-                                    <ion-input type="text" name="firstName" required></ion-input>
+                                    <ion-input type="text" [(ngModel)]="firstname" required value={{firstname}}
+                                        name="firstname"></ion-input>
                                 </ion-item>
                             </ion-row>
                             <ion-row class="padding-horizantal">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">Last name</ion-label>
-                                    <ion-input type="text" name="lastName" required></ion-input>
+                                    <ion-input type="text" [(ngModel)]="lastname" required value={{lastname}}
+                                        name="lastname"></ion-input>
                                 </ion-item>
                             </ion-row>
                             <ion-row class="padding-horizantal">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">Contact number</ion-label>
-                                    <ion-input type="text" name="contactNumber" required></ion-input>
+                                    <ion-input type="text" [(ngModel)]="phone" required value={{phone}} name="phone">
+                                    </ion-input>
                                 </ion-item>
                             </ion-row>
                             <ion-row class="padding-horizantal">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">Email id</ion-label>
-                                    <ion-input type="email" name="email" required></ion-input>
+                                    <ion-input type="email" [(ngModel)]="email" required value={{email}} name="email">
+                                    </ion-input>
                                 </ion-item>
                             </ion-row>
                             <ion-row class="padding-horizantal">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">City</ion-label>
-                                    <ion-input type="text" name="city" required></ion-input>
+                                    <ion-input type="text" [(ngModel)]="city" required value={{city}} name="city">
+                                    </ion-input>
                                 </ion-item>
                             </ion-row>
                             <ion-row class="padding-horizantal">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">Country</ion-label>
-                                    <ion-input type="text" name="country" [(ngModel)]="password" required></ion-input>
+                                    <ion-input type="text" [(ngModel)]="country" required value={{country}}
+                                        name="country"></ion-input>
                                 </ion-item>
                             </ion-row>
                             <ion-row class="padding-horizantal">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">About me</ion-label>
-                                    <ion-textarea></ion-textarea>
+                                    <ion-textarea value={{title}} [(ngModel)]="title" name="title"></ion-textarea>
                                 </ion-item>
                             </ion-row>
 
-                            <ion-row class="padding-horizantal">
+                            <ion-row class="padding-horizantal" *ngIf="userType === 'Student'">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">Grade</ion-label>
+                                    <ion-input type="text" [(ngModel)]="grade" value={{grade}} name="grade">
+                                    </ion-input>
+                                </ion-item>
+                            </ion-row>
+
+                            <ion-row class="padding-horizantal"
+                                *ngIf="userType === 'Student' || userType === 'Teacher' ">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">School</ion-label>
-                                    <ion-input type="text" name="school"></ion-input>
+                                    <ion-input type="text" [(ngModel)]="school" value={{school}} name="school">
+                                    </ion-input>
                                 </ion-item>
                             </ion-row>
 
-                            <ion-row class="padding-horizantal">
+                            <ion-row class="padding-horizantal" *ngIf="userType === 'Teacher'">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">Certifications</ion-label>
-                                    <ion-input type="text" name="certifications"></ion-input>
+                                    <ion-input type="text" value={{certifications}} [(ngModel)]="certifications"
+                                        name="certifications"></ion-input>
                                 </ion-item>
                             </ion-row>
 
-                            <ion-row class="padding-horizantal">
+                            <ion-row class="padding-horizantal" *ngIf="userType === 'Teacher'">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">Affiliations</ion-label>
-                                    <ion-input type="text" name="affiliations"></ion-input>
+                                    <ion-input type="text" value={{affiliations}} [(ngModel)]="affiliations"
+                                        name="affiliations"></ion-input>
                                 </ion-item>
                             </ion-row>
 
-                            <ion-row class="padding-horizantal">
+                            <ion-row class="padding-horizantal" *ngIf="userType === 'Teacher'">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">Experience</ion-label>
-                                    <ion-input type="text" name="experience"></ion-input>
+                                    <ion-input type="text" value={{experiance}} [(ngModel)]="experiance"
+                                        name="experiance"></ion-input>
                                 </ion-item>
                             </ion-row>
 
                             <ion-row class="padding-horizantal">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">Facebook Link</ion-label>
-                                    <ion-input type="text" name="fbLink"></ion-input>
+                                    <ion-input type="text" value={{facebookLink}} [(ngModel)]="facebookLink"
+                                        name="facebookLink">
+                                    </ion-input>
                                 </ion-item>
                             </ion-row>
 
                             <ion-row class="padding-horizantal">
                                 <ion-item class="form-feild">
                                     <ion-label position="stacked">Linkedin Link</ion-label>
-                                    <ion-input type="text" name="linkedInLink"></ion-input>
+                                    <ion-input type="text" value={{linkedinLink}} [(ngModel)]="linkedinLink"
+                                        name="linkedinLink"></ion-input>
+                                </ion-item>
+                            </ion-row>
+
+                            <ion-row class="padding-horizantal" *ngIf="userType === 'Student'">
+                                <ion-item class="form-feild">
+                                    <ion-label position="stacked">parent email</ion-label>
+                                    <ion-input type="Readonly" value={{parentEmail}} readOnly>
+                                    </ion-input>
                                 </ion-item>
                             </ion-row>
 

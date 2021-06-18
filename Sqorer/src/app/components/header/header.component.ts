@@ -12,12 +12,15 @@ export class HeaderComponent implements OnInit {
 
 
   firstName: any;
-
+  profilePic: any;
   constructor(private popOverController: PopoverController, private authService: AuthService) { }
 
   ngOnInit() {
     console.log('header');
-    this.authService.getUser().subscribe((data) => this.firstName = data.firstname);
+    this.authService.getUser().subscribe((data) => {
+      this.firstName = data.firstname;
+      this.profilePic= data.profile;
+    });
   }
 
   async openProfilePopOver(event: any) {

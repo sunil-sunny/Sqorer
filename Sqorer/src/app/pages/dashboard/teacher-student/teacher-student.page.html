@@ -1,0 +1,136 @@
+<app-header></app-header>
+
+<ion-content>
+  <ion-grid class="ion-padding" style="background-color: #F2F2F2; height: fit-content;">
+    <ion-row> 
+      <ion-col size-xl="8" size-lg="12" size-md="12" side-sm="12" size="12">
+
+        <!-- All Teams -->
+        <ion-card style="height: 100vh;">
+          <ion-card-header>
+            <ion-card-title style="display: flex; flex-direction: row; justify-content: space-between;">
+              <p>Students</p>
+            </ion-card-title>
+          </ion-card-header>
+          <!--  lable row -->
+          <ion-row style="height: fit-content; padding-top: 10px; padding-bottom: 10px;">
+            <ion-item-divider>
+              <ion-col size-xl="0.5" size-lg="0.5" size-md="0.5" size-sm="1" size="1">
+                <h4>#</h4>
+              </ion-col>
+
+              <ion-col size-xl="1" size-lg="1.5" size-md="1.75" size-sm="1" size="1" class=ion-hide-xl-down>
+                <h4>Avatar</h4>
+              </ion-col>
+
+              <ion-col size-xl="2.75" size-lg="2.75" size-md="2.5" size-sm="4" size="4">
+                <h4>Student</h4>
+              </ion-col>
+
+              <ion-col size-xl="2" size-lg="2.5" size-md="2.5" size-sm="3" size="3" class="ion-hide-md-down">
+                <h4>Country</h4>
+              </ion-col>
+              <ion-col size-xl="2.5" size-lg="2.75" size-md="2.5" size-sm="3" size="3" class="ion-hide-md-down">
+                <h4>Team
+                </h4>
+              </ion-col>
+              <ion-col size-xl="2.25" size-lg="2.5" size-md="2.5" size-sm="3" size="3">
+                <h4>Email
+                </h4>
+              </ion-col>
+              <ion-col size-xl="1.5" size-lg="1" size-md="1.5" size-sm="3" size="3">
+                <h4>Active
+                </h4>
+              </ion-col>
+            </ion-item-divider>
+          </ion-row>
+          <ion-list class="ion-no-padding">
+            <ion-row *ngFor="let student of students;let i=index;" style="height: fit-content;">
+              <ion-item-divider class="selected-row">
+                <ion-col size-xl="0.5" size-lg="0.5" size-md="0.5" size-sm="1" size="1">
+                  <span>{{i+1}}</span>
+                </ion-col>
+
+                <ion-col size-xl="1" size-lg="1.5" size-md="1.75" size-sm="1" size="1" class=ion-hide-xl-down>
+                  <span>
+                    <ion-card style="border-radius: 50%;height: 35px;
+                    width: 35px;">
+                      <ion-header>
+                        <ion-img src={{student.student.profile}} alt="A">
+                        </ion-img>
+                      </ion-header>
+                    </ion-card>
+                  </span>
+                </ion-col>
+
+                <ion-col size-xl="2.75" size-lg="2.75" size-md="2.5" size-sm="4" size="4">
+                  <span>{{student.student.firstname}} {{student.student.lastname}}</span>
+                </ion-col>
+
+                <ion-col size-xl="2" size-lg="2.5" size-md="2.5" size-sm="3" size="3" class="ion-hide-md-down">
+                  <span>{{student.student.country}}</span>
+                </ion-col>
+                <ion-col size-xl="2.5" size-lg="2.75" size-md="2.5" size-sm="3" size="3" class="ion-hide-md-down">
+                  <span *ngIf="student.teams.length == 0">-</span>
+                  <ion-row>
+                    <ion-col *ngFor="let team of student.teams" size="12">
+                      <span>{{team.name}}
+                      </span>
+                    </ion-col>
+                  </ion-row>
+
+                </ion-col>
+                <ion-col size-xl="2.25" size-lg="2.5" size-md="2.5" size-sm="3" size="3">
+                  <span>{{student.student.email}}</span>
+                </ion-col>
+                <ion-col size-xl="1.5" size-lg="1" size-md="1.5" size-sm="3" size="3">
+                  <ion-icon *ngIf="student.student.isActive" name="pencil-outline" color="primary"
+                    style="font-size: 16px;"></ion-icon>
+                </ion-col>
+              </ion-item-divider>
+            </ion-row>
+
+          </ion-list>
+        </ion-card>
+
+      </ion-col>
+
+      <ion-col size-xl="4" size-lg="12" size-md="12" size-sm="12" size="12">
+        <ion-card style="height: 70vh;">
+          <ion-card-header>
+            <ion-card-title style="display: flex; flex-direction: row; justify-content: space-between;">
+              <p>Invitation</p>
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-row>
+            <ion-item style="width: 100%;">
+              <ion-label>Choose team</ion-label>
+              <ion-select placeholder="Select One" [(ngModel)]="selectedTeamId">
+
+                <ion-select-option value="{{team._id}}" *ngFor="let team of allTeams">
+                  {{team.name}}</ion-select-option>
+
+              </ion-select>
+            </ion-item>
+          </ion-row>
+          <ion-list>
+            <ion-row *ngFor="let feild of addEmailFeild; let i = index;trackBy:trackByIdx" style="height: 60px;">
+              <ion-item style="width: 100%; border-radius: 50px;">
+                <ion-input type="text" [(ngModel)]="addEmailFeild[i]" placeholder="Enter Team name"></ion-input>
+              </ion-item>
+            </ion-row>
+          </ion-list>
+          <ion-row class="ion-justify-content-center" style="padding-top: 30px;">
+            <ion-col size-xl="4" size-lg="2" size-md="2.5" size-sm="12" size="12" class="ion-justify-content-center">
+              <ion-button color="primary" expand="block" (click)="addStudent()">Add more</ion-button>
+            </ion-col>
+            <ion-col size-xl="3" size-lg="1.5" size-md="2" size-sm="12" size="12">
+              <ion-button color="primary" expand="block" (click)="saveStudent()">Invite</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

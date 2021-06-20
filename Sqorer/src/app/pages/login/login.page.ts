@@ -27,9 +27,6 @@ export class LoginPage implements OnInit {
       if (data.token) {
         localStorage.setItem('token', data.token);
         this.authService.getUser().subscribe((data1) => {
-          console.log(data1);
-          console.log('logged in and after');
-          console.log(data1.userType);
           localStorage.setItem('role', data1.userType);
           // eslint-disable-next-line no-underscore-dangle
           localStorage.setItem('id', data1._id);
@@ -38,6 +35,9 @@ export class LoginPage implements OnInit {
         });
         this.router.navigate(['/dashboard']);
       }
+    }, (err) => {
+      console.log('error occured');
+      alert(err.error.msg);
     });
 
 

@@ -9,11 +9,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class TeacherService {
 
   url: any = 'http://localhost:8082/api/teacher/';
-  //url: any = 'http://test-service.sqorer.com/api/team';
+  //url: any = 'http://test-service.sqorer.com/api/teacher';
 
   constructor(private http: HttpClient) { }
 
-  getAllStudentsUnderTeacher(): Observable<any[]>{
+  getAllStudentsUnderTeacher(): Observable<any[]> {
     const headerData = {
       // eslint-disable-next-line quote-props
       'Auth': 'Bearer' + localStorage.getItem('token')
@@ -23,13 +23,14 @@ export class TeacherService {
     return this.http.get<any[]>(this.url + 'getStudents', { headers: reqheaders });
   }
 
-  addStudent(studentEmail): Observable<any>{
+  addStudent(studentEmail): Observable<any> {
     const headerData = {
       // eslint-disable-next-line quote-props
       'Auth': 'Bearer' + localStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
-    return this.http.post<any[]>(this.url + 'addStudent',studentEmail, { headers: reqheaders });
+    return this.http.post<any[]>(this.url + 'addStudent', studentEmail, { headers: reqheaders });
   }
+
 }

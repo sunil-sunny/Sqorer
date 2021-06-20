@@ -30,6 +30,10 @@ const UserSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
   lastLogin: {
     type: Date,
   },
@@ -94,19 +98,19 @@ const UserSchema = mongoose.Schema({
 UserSchema.statics.findByCredentials = async function (email, password) {
 
   try {
-      const user = await User.findOne({ email });
-      if (!user) {
-          throw new Error('User doesnt exists')
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new Error('User doesnt exists')
+    } else {
+      const isValidPassword = await bcrypt.compare(password, user.password)
+      if (!isValidPassword) {
+        throw new Error('Invalid User Credentials')
       } else {
-          const isValidPassword = await bcrypt.compare(password, user.password)
-          if (!isValidPassword) {
-              throw new Error('Invalid User Credentials')
-          } else {
-              return user
-          }
+        return user
       }
+    }
   } catch (e) {
-      throw new Error(e)
+    throw new Error(e)
   }
 }
 
@@ -121,7 +125,7 @@ UserSchema.methods.toJSON = function () {
 UserSchema.methods.getAuthToken = async function () {
 
   const user = this;
-  const token = await jwt.sign({ _id: user._id }, config.get("jwtSecret"), { expiresIn: 360000});
+  const token = await jwt.sign({ _id: user._id }, config.get("jwtSecret"), { expiresIn: 360000 });
   user.tokens = user.tokens.concat({ token });
   await user.save();
   return token;

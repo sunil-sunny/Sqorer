@@ -9,8 +9,8 @@ import { Injectable } from '@angular/core';
 export class TeamService {
 
 
-  url: any = 'http://localhost:8082/api/team/';
-  //url: any = 'http://test-service.sqorer.com/api/team';
+  //url: any = 'http://localhost:8082/api/team/';
+  url: any = 'http://test-service.sqorer.com/api/team';
 
   constructor(private http: HttpClient) { }
 
@@ -36,13 +36,44 @@ export class TeamService {
     return this.http.get<any[]>(this.url + 'getTeamMembers/' + id, { headers: reqheaders });
   }
 
-  createTeam(team): Observable<any[]>{
+  createTeam(team): Observable<any[]> {
     const headerData = {
       // eslint-disable-next-line quote-props
       'Auth': 'Bearer' + localStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
-    return this.http.post<any[]>(this.url + 'createTeam',team, { headers: reqheaders });
+    return this.http.post<any[]>(this.url + 'createTeam', team, { headers: reqheaders });
+  }
+
+  addMemberToTeam(body): Observable<any> {
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + localStorage.getItem('token')
+
+    };
+    console.log('body is ' + body);
+    const reqheaders = new HttpHeaders(headerData);
+    return this.http.post<any[]>(this.url + 'addMembers', body, { headers: reqheaders });
+  }
+
+  getAllStudentsWithTeam(): Observable<any[]> {
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + localStorage.getItem('token')
+
+    };
+    const reqheaders = new HttpHeaders(headerData);
+    return this.http.get<any[]>(this.url + 'getAllStudentsWithTeams', { headers: reqheaders });
+  }
+
+  removeMember(body): Observable<any> {
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + localStorage.getItem('token')
+
+    };
+    const reqheaders = new HttpHeaders(headerData);
+    return this.http.put<any>(this.url + 'removeMembers',body, { headers: reqheaders });
   }
 }

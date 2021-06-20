@@ -30,7 +30,7 @@ teamSchema.methods.toJSON = function () {
 
 teamSchema.methods.addMember = async function (email) {
     const team = this;
-    team.students = team.members.concat({ email });
+    team.members = team.members.concat({email});
     await team.save();
     return email;
 }

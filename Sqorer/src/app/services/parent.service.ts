@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ParentService {
-  url: any = 'http://localhost:8082/api/parent/';
-  //url: any = 'http://test-service.sqorer.com/api/parent';
+  //url: any = 'http://localhost:8082/api/parent/';
+  url: any = 'http://test-service.sqorer.com/api/parent';
 
   constructor(private http: HttpClient) { }
 

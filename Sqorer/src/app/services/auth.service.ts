@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
 
-  url: any = 'http://localhost:8082/api/';
-  //url: any = 'http://test-service.sqorer.com/api/';
+  //url: any = 'http://localhost:8082/api/';
+  url: any = 'http://test-service.sqorer.com/api/';
 
   constructor(private http: HttpClient) { }
 

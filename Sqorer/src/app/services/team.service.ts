@@ -10,7 +10,7 @@ export class TeamService {
 
 
   //url: any = 'http://localhost:8082/api/team/';
-  url: any = 'http://test-service.sqorer.com/api/team';
+  url: any = 'http://test-service.sqorer.com/api/team/';
 
   constructor(private http: HttpClient) { }
 

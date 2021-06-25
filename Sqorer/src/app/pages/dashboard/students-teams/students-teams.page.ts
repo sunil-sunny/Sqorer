@@ -32,19 +32,39 @@ export class StudentsTeamsPage implements OnInit {
   }
 
   getAllTeams() {
-    this.teamsService.getAllTeams().subscribe((data) => {
-      this.teams = data;
-      // eslint-disable-next-line no-underscore-dangle
-      this.selectedTeamMembers = this.teams[0].members;
-      // eslint-disable-next-line no-underscore-dangle
-      this.selectedTeamId = data[0]._id;
-      this.selectedTeamName = data[0].name;
-      // eslint-disable-next-line no-underscore-dangle
-      this.teamsService.getTeamMembers(this.teams[0]._id).subscribe((data1) => {
-        this.selectedTeam = data1;
 
+    if (localStorage.getItem('role') === 'Student') {
+
+      this.teamsService.getStudentTeams().subscribe((data) => {
+        this.teams = data;
+        // eslint-disable-next-line no-underscore-dangle
+        this.selectedTeamMembers = this.teams[0].members;
+        // eslint-disable-next-line no-underscore-dangle
+        this.selectedTeamId = data[0]._id;
+        this.selectedTeamName = data[0].name;
+        // eslint-disable-next-line no-underscore-dangle
+        this.teamsService.getTeamMembers(this.teams[0]._id).subscribe((data1) => {
+          this.selectedTeam = data1;
+
+        });
       });
-    });
+    } else {
+      this.teamsService.getAllTeams().subscribe((data) => {
+        this.teams = data;
+        // eslint-disable-next-line no-underscore-dangle
+        this.selectedTeamMembers = this.teams[0].members;
+        // eslint-disable-next-line no-underscore-dangle
+        this.selectedTeamId = data[0]._id;
+        this.selectedTeamName = data[0].name;
+        // eslint-disable-next-line no-underscore-dangle
+        this.teamsService.getTeamMembers(this.teams[0]._id).subscribe((data1) => {
+          this.selectedTeam = data1;
+
+        });
+      });
+    }
+
+
   }
 
   openTeam(teamId, name) {
@@ -56,33 +76,60 @@ export class StudentsTeamsPage implements OnInit {
   }
 
   createTeam() {
+    console.log(localStorage.getItem('isPremium'));
     console.log('create team is working');
+
     const filtered = this.addEmailFeild.filter((element) => element);
-    filtered.forEach(element => {
+    const filteredOne = new Set(filtered);
+    console.log(filteredOne);
+
+    filteredOne.forEach(element => {
       const member = {
         'email': element
       };
       this.finalizedMembers.push(member);
     });
 
+    this.finalizedMembers.forEach((e) => console.log(e));
     if (this.finalizedMembers.length === 0 || this.teamName.length === 0) {
-      this.alert('Enter required team details to proceed');
+      this.alert('Warning', 'Enter required team details to proceed');
     } else {
 
+      let isEligible = false;
       const newTeam = {
         'name': this.teamName,
         'avatar': 'https://image.freepik.com/free-vector/group-business-people-avatar-character_24877-57314.jpg',
         'members': this.finalizedMembers
       };
-      this.teamsService.createTeam(newTeam).subscribe((data) => {
-        this.alert('Team Created');
-        this.getAllTeams();
-        this.addEmailFeild = ['', '', '', '', '', ''];
-        this.teamName = '';
-        this.finalizedMembers = [];
-      }, (err) => {
-        this.alert(err.error.msg);
-      });
+
+      if (localStorage.getItem('role') === 'Teacher') {
+        console.log('eligible');
+        isEligible = true;
+      }
+
+      if (localStorage.getItem('role') === 'Student') {
+        if (localStorage.getItem('isPremium') === 'true') {
+          console.log('eligible');
+          isEligible = true;
+        }
+      }
+
+      console.log(isEligible);
+
+      if (isEligible) {
+        this.teamsService.createTeam(newTeam).subscribe((data) => {
+          this.alert('Success', 'Team Created');
+          this.getAllTeams();
+          this.addEmailFeild = ['', '', '', '', '', ''];
+          this.teamName = '';
+          this.finalizedMembers = [];
+        }, (err) => {
+          this.alert('Error', err.error.msg);
+        });
+      } else {
+        this.alert('Warning', 'you are not eligible to create a team');
+      }
+
     }
   }
 
@@ -94,10 +141,10 @@ export class StudentsTeamsPage implements OnInit {
     return index;
   }
 
-  async alert(msg) {
+  async alert(status, msg) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Success',
+      header: status,
       subHeader: '',
       message: msg,
       buttons: ['OK']

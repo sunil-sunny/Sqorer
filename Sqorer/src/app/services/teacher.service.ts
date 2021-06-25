@@ -8,8 +8,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class TeacherService {
 
-  //url: any = 'http://localhost:8082/api/teacher/';
-  url: any = 'http://test-service.sqorer.com/api/teacher/';
+  url: any = 'http://localhost:8082/api/teacher/';
+  //url: any = 'http://test-service.sqorer.com/api/teacher/';
 
   constructor(private http: HttpClient) { }
 

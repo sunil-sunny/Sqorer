@@ -8,7 +8,6 @@ const TeacherStudent = require('../../models/teacher-student');
 router.get('/getStudents', auth, async (req, res) => {
     try {
         const groupId = req.params.id;
-        console.log(groupId);
         let team = await TeacherStudent.findOne({ teacherId: req.user._id });
         let emailMembers = team.students;
         let members = [];

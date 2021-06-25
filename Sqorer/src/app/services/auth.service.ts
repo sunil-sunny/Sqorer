@@ -83,7 +83,6 @@ export class AuthService {
 
     };
     const reqheaders = new HttpHeaders(headerData);
-
-    return this.http.post<any>(this.url + 'auth/logout', { headers: reqheaders });
+    return this.http.post<any>(this.url + 'auth/logout', null, { headers: reqheaders });
   }
 }

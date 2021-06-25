@@ -33,8 +33,6 @@ router.post('/google', async (req, res) => {
       id: user.id,
     };
 
-    console.log(user.id);
-
     //return token
     jwt.sign(
       payload,
@@ -47,7 +45,6 @@ router.post('/google', async (req, res) => {
           return res.status(500).json({
             msg: `Error, can't create a new token ${err}`,
           });
-        console.log(token);
         return res.json({ token: token });
       }
     );

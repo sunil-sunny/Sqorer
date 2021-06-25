@@ -9,8 +9,8 @@ import { Injectable } from '@angular/core';
 export class TeamService {
 
 
-  //url: any = 'http://localhost:8082/api/team/';
-  url: any = 'http://test-service.sqorer.com/api/team/';
+  url: any = 'http://localhost:8082/api/team/';
+  //url: any = 'http://test-service.sqorer.com/api/team/';
 
   constructor(private http: HttpClient) { }
 
@@ -67,6 +67,17 @@ export class TeamService {
     return this.http.get<any[]>(this.url + 'getAllStudentsWithTeams', { headers: reqheaders });
   }
 
+
+  getStudentTeams(): Observable<any[]> {
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + localStorage.getItem('token')
+
+    };
+    const reqheaders = new HttpHeaders(headerData);
+    return this.http.get<any[]>(this.url + 'getStudentTeams', { headers: reqheaders });
+  }
+
   removeMember(body): Observable<any> {
     const headerData = {
       // eslint-disable-next-line quote-props
@@ -74,6 +85,6 @@ export class TeamService {
 
     };
     const reqheaders = new HttpHeaders(headerData);
-    return this.http.put<any>(this.url + 'removeMembers',body, { headers: reqheaders });
+    return this.http.put<any>(this.url + 'removeMembers', body, { headers: reqheaders });
   }
 }

@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     this.authService.loginUser(form.value).subscribe((data) => {
 
       if (data.msg) {
-        this.alert('',data.msg);
+        this.alert('', data.msg);
       }
 
       if (data.token) {
@@ -31,6 +31,7 @@ export class LoginPage implements OnInit {
           localStorage.setItem('role', data1.userType);
           // eslint-disable-next-line no-underscore-dangle
           localStorage.setItem('id', data1._id);
+          localStorage.setItem('isPremium', data1.isPremium);
         });
         this.router.navigate(['/dashboard']);
       }

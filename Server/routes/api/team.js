@@ -9,7 +9,6 @@ router.post('/addMembers', auth, async (req, res) => {
     try {
 
         const { teamId, members } = req.body;
-        console.log(req.body);
         const team = await Team.findOne({ _id: teamId });
         console.log(members);
         for (let i = 0; i < members.length; i++) {
@@ -99,6 +98,45 @@ router.post('/createTeam', auth, async (req, res) => {
             .json({ msg: `Server error ${error}` });
     }
 })
+
+
+
+router.get('/getStudentTeams', auth, async (req, res) => {
+
+    try {
+
+        const userType = 'Student';
+        let student = await User.findOne({ userType, _id: req.user._id });
+        let teams = await Team.find({});
+        let userTeams = [];
+        let email = student.email;
+
+        for (var j = 0; j < teams.length; j++) {
+
+            let ownerId = teams[j].teacherId;
+            if (ownerId === student._id) {
+                userTeams.push(team[j]);
+            } else {
+                let members = teams[j].members;
+
+                for (let k = 0; k < members.length; k++) {
+                    if (members[k].email === email) {
+                        userTeams.push(teams[j]);
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        res.status(200).json(userTeams);
+
+    } catch (e) {
+        console.log(e);
+    }
+
+})
+
 
 
 router.get('/getAllStudentsWithTeams', auth, async (req, res) => {

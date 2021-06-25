@@ -18,7 +18,6 @@ export class HeaderProfilePopoverComponent implements OnInit {
   ngOnInit() { }
 
   logout() {
-
     this.authService.logout().subscribe((data) => {
       if (data.success) {
         localStorage.clear();

@@ -67,12 +67,14 @@ router.post('/google', async (req, res) => {
 //         We use nodemailer to send a code to the email that he provided us.
 
 
-router.get('/check-email/:email', async (req, res) => {
+router.post('/check-email', async (req, res) => {
   try {
-    const email = req.params.email;
+    const { email } = req.body;
+    console.log('sending otp to ' + email);
     const tempUser = await User.findOne({ email });
     if (!tempUser) return res.status(404).json({ success: false, msg: `This ${email} isn't linked with any account yet. Please enter another one.` });
     let tempCode = await Code.findOne({ user: tempUser._id, status: false });
+
     if (tempCode) {
       tempCode.set({ status: true });
       await tempCode.save();
@@ -90,12 +92,15 @@ router.get('/check-email/:email', async (req, res) => {
       existCode.set({ isExpired: true });
       await existCode.save();
     }
-
+    console.log(code);
 
     //get my email and password 
 
-    const userEmail = process.env.EMAIL,
-      userPassword = process.env.PASSWORD;
+    const userEmail = 'healthdal123@gmail.com',
+      userPassword = 'health@123';
+
+    console.log(userEmail);
+    console.log(userPassword);
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
@@ -107,6 +112,7 @@ router.get('/check-email/:email', async (req, res) => {
         pass: `${userPassword}`, // password of the app
       },
     });
+
 
     let info = await transporter.sendMail({
       from: '"Math Online Game 👻" <support@mathgame.com>', // sender address
@@ -192,11 +198,11 @@ router.post("/", async (req, res) => {
 }
 );
 
-router.post("/logout", async (req, res) => {
+router.post("/logout", auth, async (req, res) => {
 
   try {
+    console.log(req.user);
     req.user.tokens = req.user.tokens.filter((token) => {
-
       return token.token !== req.token
     })
     await req.user.save();
@@ -204,7 +210,7 @@ router.post("/logout", async (req, res) => {
       "success": "true"
     })
   } catch (e) {
-    res.status(500).send('unable to logout')
+    res.status(500).json({ msg: 'unable to logout' });
   }
 
 });

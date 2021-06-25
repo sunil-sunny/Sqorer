@@ -37,7 +37,7 @@ router.post('/addMembers', auth, async (req, res) => {
     }
 })
 
-
+//remove users from team
 router.put('/removeMembers', auth, async (req, res) => {
 
     try {
@@ -55,6 +55,7 @@ router.put('/removeMembers', auth, async (req, res) => {
             .json({ msg: `Server error ${error}` });
     }
 })
+
 //Allow user to add member in his team
 router.put('/:id', async (req, res) => {
     try {
@@ -136,6 +137,7 @@ router.get('/getAllStudentsWithTeams', auth, async (req, res) => {
     }
 
 })
+
 //get all teams under teacher
 router.get('/getAllTeams/all', auth, async (req, res) => {
     try {

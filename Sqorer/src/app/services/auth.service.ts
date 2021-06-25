@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
 
-  //url: any = 'http://localhost:8082/api/';
-  url: any = 'http://test-service.sqorer.com/api/';
+  url: any = 'http://localhost:8082/api/';
+  //url: any = 'http://test-service.sqorer.com/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -63,15 +63,27 @@ export class AuthService {
     return this.http.post<any>(this.url + 'user/', body);
   }
 
-  /* private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+  sendOtp(email): Observable<any> {
+    return this.http.post<any>(this.url + 'auth/check-email', { email });
+  }
 
-      // TODO: send the error to remote logging infrastructure
-      console.error('its in interceptor' + error.status); // log to console instead
-
-      alert(error.msg);
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
+  resetPassword(email, password, code): Observable<any> {
+    const body = {
+      email,
+      password,
+      code
     };
-  } */
+    return this.http.put<any>(this.url + 'auth/check-email', body);
+  }
+
+  logout(): Observable<any> {
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + localStorage.getItem('token')
+
+    };
+    const reqheaders = new HttpHeaders(headerData);
+
+    return this.http.post<any>(this.url + 'auth/logout', { headers: reqheaders });
+  }
 }

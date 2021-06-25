@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable quote-props */
 import { TeamService } from './../../../services/team.service';
@@ -22,7 +23,7 @@ export class StudentsTeamsPage implements OnInit {
   selectedTeamId: any;
   selectedTeamName: any;
 
-  constructor(private teamsService: TeamService) { }
+  constructor(private teamsService: TeamService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.teamName = '';
@@ -46,7 +47,7 @@ export class StudentsTeamsPage implements OnInit {
     });
   }
 
-  openTeam(teamId,name) {
+  openTeam(teamId, name) {
     this.selectedTeamId = teamId;
     this.selectedTeamName = name;
     this.teamsService.getTeamMembers(teamId).subscribe((data) => {
@@ -65,7 +66,7 @@ export class StudentsTeamsPage implements OnInit {
     });
 
     if (this.finalizedMembers.length === 0 || this.teamName.length === 0) {
-      alert('Enter required team details to proceed');
+      this.alert('Enter required team details to proceed');
     } else {
 
       const newTeam = {
@@ -74,13 +75,13 @@ export class StudentsTeamsPage implements OnInit {
         'members': this.finalizedMembers
       };
       this.teamsService.createTeam(newTeam).subscribe((data) => {
-        alert('Team Created');
+        this.alert('Team Created');
         this.getAllTeams();
         this.addEmailFeild = ['', '', '', '', '', ''];
         this.teamName = '';
         this.finalizedMembers = [];
       }, (err) => {
-        alert(err.error.msg);
+        this.alert(err.error.msg);
       });
     }
   }
@@ -91,6 +92,17 @@ export class StudentsTeamsPage implements OnInit {
 
   trackByIdx(index: number, obj: any): any {
     return index;
+  }
+
+  async alert(msg) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Success',
+      subHeader: '',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
   addMemberToTeam() {

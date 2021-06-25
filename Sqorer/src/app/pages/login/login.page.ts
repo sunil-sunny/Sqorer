@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,7 +13,7 @@ export class LoginPage implements OnInit {
   email: any = '';
   password: any = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() { }
 
@@ -21,7 +22,7 @@ export class LoginPage implements OnInit {
     this.authService.loginUser(form.value).subscribe((data) => {
 
       if (data.msg) {
-        alert(data.msg);
+        this.alert('',data.msg);
       }
 
       if (data.token) {
@@ -30,20 +31,29 @@ export class LoginPage implements OnInit {
           localStorage.setItem('role', data1.userType);
           // eslint-disable-next-line no-underscore-dangle
           localStorage.setItem('id', data1._id);
-          // eslint-disable-next-line no-underscore-dangle
-          console.log(data1._id);
         });
         this.router.navigate(['/dashboard']);
       }
     }, (err) => {
-      console.log('error occured');
-      alert(err.error.msg);
+      this.alert('Error', err.error.msg);
     });
 
 
   }
 
   setUserRole() {
+  }
+
+
+  async alert(header, msg) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header,
+      subHeader: '',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
 }

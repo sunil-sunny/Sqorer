@@ -1,3 +1,5 @@
+import { TeacherGuard } from './../../guards/teacher.guard';
+import { ParentGuard } from './../../guards/parent.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardPage } from './dashboard.page';
@@ -9,23 +11,25 @@ const routes: Routes = [
   },
   {
     path: 'subscription',
-    loadChildren: ()=> import('./subscription/subscription.module').then(m => m.SubscriptionPageModule)
+    loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionPageModule)
   },
   {
     path: 'profile',
-    loadChildren: ()=> import('./profile/profile.module').then(m => m.ProfilePageModule)
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
   },
   {
     path: 'add-students',
-    loadChildren: () => import('./add-students/add-students.module').then( m => m.AddStudentsPageModule)
+    loadChildren: () => import('./add-students/add-students.module').then(m => m.AddStudentsPageModule),
+    canLoad: [ParentGuard]
   },
   {
     path: 'students-teams',
-    loadChildren: () => import('./students-teams/students-teams.module').then( m => m.StudentsTeamsPageModule)
+    loadChildren: () => import('./students-teams/students-teams.module').then(m => m.StudentsTeamsPageModule)
   },
   {
     path: 'teacher-student',
-    loadChildren: () => import('./teacher-student/teacher-student.module').then( m => m.TeacherStudentPageModule)
+    loadChildren: () => import('./teacher-student/teacher-student.module').then(m => m.TeacherStudentPageModule),
+    canLoad: [TeacherGuard]
   }
 ];
 

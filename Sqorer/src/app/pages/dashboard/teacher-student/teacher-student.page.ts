@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 /* eslint-disable quote-props */
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from 'src/app/services/team.service';
@@ -15,7 +16,7 @@ export class TeacherStudentPage implements OnInit {
   students: any[];
   finalizedMembers: any[] = [];
 
-  constructor(private teamsService: TeamService) { }
+  constructor(private teamsService: TeamService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.getAllTeams();
@@ -25,17 +26,15 @@ export class TeacherStudentPage implements OnInit {
   getAllStudents() {
     this.teamsService.getAllStudentsWithTeam().subscribe((data) => {
       this.students = data;
-      console.log(data);
     }, (err) => {
-      alert(err);
+      this.alert('Error',err.error.msg);
     });
   }
   getAllTeams() {
     this.teamsService.getAllTeams().subscribe((data) => {
       this.allTeams = data;
-      console.log(data);
     }, (err) => {
-      alert(err.error.msg);
+      this.alert('Error',err.error.msg);
     });
   }
   addStudent() {
@@ -54,7 +53,7 @@ export class TeacherStudentPage implements OnInit {
     });
 
     if (this.finalizedMembers.length === 0) {
-      alert('Enter email to proceed');
+      this.alert('','Enter email to proceed');
     } else {
 
       const newTeam = {
@@ -64,16 +63,27 @@ export class TeacherStudentPage implements OnInit {
 
       this.teamsService.addMemberToTeam(newTeam).subscribe((data) => {
         if (data.msg) {
-          alert(data.msg);
+          this.alert('Success',data.msg);
           this.addEmailFeild = ['', '', '', '', ''];
           this.selectedTeamId = '';
           this.getAllTeams();
           this.getAllStudents();
         }
       }, (err) => {
-        alert(err.error.msg);
+        this.alert('Error', err.error.msg);
       });
     }
 
+  }
+
+  async alert(header, msg) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header,
+      subHeader: '',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }

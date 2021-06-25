@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,21 +17,16 @@ export class RegisterPage implements OnInit {
   password: any = '';
   userType: any = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() { }
-
-  doRegister() {
-
-    console.log(this.firstName);
-  }
 
   register(form) {
 
     this.authService.registerUser(form.value).subscribe((data) => {
 
       if (data.msg) {
-        alert(data.msg);
+        this.alert('', data.msg);
       }
 
       if (data.token) {
@@ -38,6 +34,17 @@ export class RegisterPage implements OnInit {
         this.router.navigate(['/dashboard']);
       }
     });
+  }
+
+  async alert(header, msg) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header,
+      subHeader: '',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
 

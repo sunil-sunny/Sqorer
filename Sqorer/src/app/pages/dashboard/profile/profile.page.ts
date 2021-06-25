@@ -2,6 +2,7 @@
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from './user.model';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -36,7 +37,7 @@ export class ProfilePage implements OnInit {
   parentEmail: any = '';
   grade: any = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.getUser();
@@ -84,7 +85,7 @@ export class ProfilePage implements OnInit {
   }
 
   saveUser(form) {
-    this.authService.saveUser(form.value).subscribe((user) => {
+    this.authService.saveUser(form.value).subscribe( async (user) => {
       this.user = user;
       this.userType = user.userType;
       this.firstname = user.firstname;
@@ -105,7 +106,14 @@ export class ProfilePage implements OnInit {
       this.linkedinLink = user.linkedinLink;
       this.parentEmail = user.parentEmail;
       this.grade = user.grade;
-      alert('profile updated');
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Success',
+        subHeader: '',
+        message: 'Profile has been updated',
+        buttons: ['OK']
+      });
+      await alert.present();
     });
   }
 

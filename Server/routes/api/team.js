@@ -22,7 +22,6 @@ router.post('/addMembers', auth, async (req, res) => {
                 }
             }
             if (!isExits) {
-                console.log('not matched')
                 await team.addMember(members[i]);
             }
         }

@@ -93,15 +93,15 @@ router.post('/check-email', async (req, res) => {
 
     //get my email and password 
 
-    const userEmail = 'healthdal123@gmail.com',
-      userPassword = 'health@123';
+    const userEmail = 'sqorersupport@augmentedutech.com';
+    const userPassword = 'support@123#';
 
     console.log(userEmail);
     console.log(userPassword);
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "smtp.office365.com",
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
@@ -112,8 +112,8 @@ router.post('/check-email', async (req, res) => {
 
 
     let info = await transporter.sendMail({
-      from: '"Math Online Game 👻" <support@mathgame.com>', // sender address
-      to: `${email}, fjvm.cj@gmail.com`, // list of receivers
+      from: '"Sqorer Support" <sqorersupport@augmentedutech.com>', // sender address
+      to: `${email}, sai.menta@dal.ca`, // list of receivers
       subject: "PASSWORD RESET REQUEST ✔", // Subject line
       text: `Dear user,\n\n \tWe have received your request to reset your password. Please copy the code below.\n \tCode: ${code}` // plain text body                
     });

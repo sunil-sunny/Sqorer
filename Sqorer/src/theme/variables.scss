@@ -8,6 +8,10 @@
   src: url("../assets/Poppins/Poppins-Light.ttf");
 }
 
+ion-button {
+  text-transform: none;
+}
+
 /** Ionic CSS Variables **/
 :root {
   --ion-font-family: "Poppins" !important;

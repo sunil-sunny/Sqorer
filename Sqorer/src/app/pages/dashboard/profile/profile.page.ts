@@ -46,18 +46,12 @@ export class ProfilePage implements OnInit {
   getUser() {
 
     this.authService.getUser().subscribe((data1) => {
-      console.log(data1);
-      console.log('logged in and after');
-      console.log(data1.userType);
       localStorage.setItem('role', data1.userType);
       // eslint-disable-next-line no-underscore-dangle
       localStorage.setItem('id', data1._id);
-      // eslint-disable-next-line no-underscore-dangle
-      console.log(data1._id);
     });
 
     this.authService.getUser().subscribe((user) => {
-      console.log(user);
       this.user = user;
       this.userType = user.userType;
       this.firstname = user.firstname;

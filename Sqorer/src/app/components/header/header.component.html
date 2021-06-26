@@ -27,9 +27,6 @@
         <ion-col size="10.5" size-xl="8.75" size-lg="6.5" size-md="6" size-sm="10.5" style="margin-top: 5px;">
           <ion-row class="padding-top-sm" style="display: flex;
           justify-content: flex-end;">
-            <ion-col size-xl="0.5" size-lg="1" size-md="1.25" size-sm="1" size="1" class="ion-hide-md-down">
-              <ion-icon name="grid-outline"></ion-icon>
-            </ion-col>
 
             <ion-col size-xl="0.5" size-lg="1" size-md="1.25" size-sm="1" size="1" class="ion-hide-md-down">
               <ion-icon name="scan-outline"></ion-icon>
@@ -40,7 +37,8 @@
             </ion-col>
 
             <ion-col size-xl="1.5" size-lg="3" size-md="4" size-sm="3" size="3"
-              style="display: flex; justify-content: center;" (click)="openProfilePopOver($event)">
+              style="display: flex; justify-content: center;"
+              (click)="openProfilePopOver($event)">
               <ion-card style="border-radius: 50%;height: 30px;
               width: 30px;" class="ion-no-padding ion-no-margin">
                 <ion-header>
@@ -48,8 +46,7 @@
                   </ion-img>
                 </ion-header>
               </ion-card>
-              <span class="hide-sm" class="ion-text-wrap" style="display: flex;padding-left: 10px;
-                padding-top: 5px;">
+              <span class="ion-text-wrap ion-hide-md-down ion-no-padding" style="display: flex;padding-left: 10px;">
                 <span class="ion-hide-md-down"> {{firstName}}</span>
                 <ion-icon name="chevron-down-outline" size="small">
                 </ion-icon>

@@ -2,21 +2,21 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherService {
 
-  //url: any = 'http://localhost:8082/api/teacher/';
-  url: any = 'http://test-service.sqorer.com/api/teacher/';
+  url: string = environment.serverUrl+'teacher/';
 
   constructor(private http: HttpClient) { }
 
   getAllStudentsUnderTeacher(): Observable<any[]> {
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
@@ -26,7 +26,7 @@ export class TeacherService {
   addStudent(studentEmail): Observable<any> {
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);

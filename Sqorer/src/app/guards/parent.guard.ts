@@ -11,7 +11,7 @@ export class ParentGuard implements CanLoad {
   constructor(private router: Router, public alertController: AlertController) { }
 
   async canLoad(): Promise<boolean> {
-    const role = localStorage.getItem('role');
+    const role = sessionStorage.getItem('role');
     if (role === 'Parent') {
       return true;
     } else {

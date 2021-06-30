@@ -33,7 +33,7 @@ export class StudentsTeamsPage implements OnInit {
 
   getAllTeams() {
 
-    if (localStorage.getItem('role') === 'Student') {
+    if (sessionStorage.getItem('role') === 'Student') {
 
       this.teamsService.getStudentTeams().subscribe((data) => {
         this.teams = data;
@@ -76,7 +76,7 @@ export class StudentsTeamsPage implements OnInit {
   }
 
   createTeam() {
-    console.log(localStorage.getItem('isPremium'));
+    console.log(sessionStorage.getItem('isPremium'));
     console.log('create team is working');
 
     const filtered = this.addEmailFeild.filter((element) => element);
@@ -102,13 +102,13 @@ export class StudentsTeamsPage implements OnInit {
         'members': this.finalizedMembers
       };
 
-      if (localStorage.getItem('role') === 'Teacher') {
+      if (sessionStorage.getItem('role') === 'Teacher') {
         console.log('eligible');
         isEligible = true;
       }
 
-      if (localStorage.getItem('role') === 'Student') {
-        if (localStorage.getItem('isPremium') === 'true') {
+      if (sessionStorage.getItem('role') === 'Student') {
+        if (sessionStorage.getItem('isPremium') === 'true') {
           console.log('eligible');
           isEligible = true;
         }

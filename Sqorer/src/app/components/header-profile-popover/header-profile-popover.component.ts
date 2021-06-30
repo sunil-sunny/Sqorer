@@ -20,7 +20,7 @@ export class HeaderProfilePopoverComponent implements OnInit {
   logout() {
     this.authService.logout().subscribe((data) => {
       if (data.success) {
-        localStorage.clear();
+        sessionStorage.clear();
         this.popoverController.dismiss();
         this.router.navigate(['/home']);
       }

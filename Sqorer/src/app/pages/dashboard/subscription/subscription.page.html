@@ -1,20 +1,20 @@
+<app-header></app-header>
 <ion-grid style="background-color: #f2f2f2; width: 100vw;">
   <ion-row class="ion-justify-content-around ion-align-content-center"
     style="height:100vh; display: flex; align-items: center;">
 
     <ion-col class="main-col" size-xl="2.5" size-lg="4" size-md="5" size-xs="12"
       style="height: 470px;">
-
       <ion-row style="padding: 10px;">
         <ion-col class="ion-align-content-center">
           <ion-row style="padding-bottom:15px;">
             <ion-col size-xl="6">
               <h2>Free</h2>
-              <p style="color: green;">INR 0/month</p>
+              <p style="color: #14A800;">INR 0/month</p>
             </ion-col>
 
             <ion-col size-xl="4" offset-xl="2">
-              <p style="text-align: center; color: green;">your current plan</p>
+              <p style="text-align: center; color: #14A800;">your current plan</p>
             </ion-col>
           </ion-row>
           <div class="divider">
@@ -23,33 +23,10 @@
 
           <ion-row>
             <ion-col size="12" class="ion-justify-content-center">
-
-
               <ul>
-
-                <li>
-                  <p style="color: black;">Add students</p>
+                <li *ngFor="let feature of freeFeatures">
+                  <p style="color: black;">{{feature}}</p>
                 </li>
-
-
-                <li>
-                  <p>Play live games</p>
-                </li>
-
-
-                <li>
-                  <p>
-                    5 game types
-                  </p>
-                </li>
-
-
-                <li>
-                  <p>
-                    View reports
-                  </p>
-                </li>
-
               </ul>
             </ion-col>
 
@@ -66,13 +43,13 @@
         <ion-col class="ion-align-content-center">
           <ion-row>
             <ion-col size-xl="6">
-              <h2>Teach plus</h2>
-              <p style="color: green; margin-bottom: 0px;">INR 1000/month</p>
-              <p style="color: green; font-size: smaller;">Including GST</p>
+              <h2>{{premiumName}}</h2>
+              <p style="color: #14A800; margin-bottom: 0px;">INR {{premiumCost}}/month</p>
+              <p style="color: #14A800; font-size: smaller;">Including GST</p>
             </ion-col>
 
             <ion-col size-xl="4" offset-xl="2">
-              <p style="text-align: center; color: green;">Suggested plan</p>
+              <p style="text-align: center; color: #14A800;">Suggested plan</p>
             </ion-col>
           </ion-row>
           <div class="divider">
@@ -82,46 +59,8 @@
           <ion-row>
             <ion-col size="12" class="ion-justify-content-center">
               <ul>
-
-                <li>
-                  <p>Everything is free, plus</p>
-                </li>
-
-
-
-
-                <li>
-                  <p>
-                    Create teams
-                  </p>
-                </li>
-
-
-                <li>
-                  <p>
-                    Scheduled games
-                  </p>
-                </li>
-
-
-                <li>
-                  <p>
-                    Self paced games
-                  </p>
-                </li>
-
-
-                <li>
-                  <p>
-                    All game types
-                  </p>
-                </li>
-
-
-                <li>
-                  <p>
-                    Detailed analytics
-                  </p>
+                <li *ngFor="let feature of premiumFeatures">
+                  <p style="color: black;">{{feature}}</p>
                 </li>
               </ul>
               <div style="display: flex;

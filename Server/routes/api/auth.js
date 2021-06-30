@@ -101,15 +101,21 @@ router.post('/check-email', async (req, res) => {
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-      host: "smtp.office365.com",
+      host: 'smtp.office365.com',
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
         user: `${userEmail}`, // email of the app
-        pass: `${userPassword}`, // password of the app
-      },
+        pass: `${userPassword}` // password of the app
+      }
     });
 
+    /*     Host: smtp.office365.com
+    Port: 587
+    TLS/StartTLS: Enabled
+    Username/email address: sqorersupport@augmentedutech.com
+    password: support@123#
+     */
 
     let info = await transporter.sendMail({
       from: '"Sqorer Support" <sqorersupport@augmentedutech.com>', // sender address

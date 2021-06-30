@@ -9,7 +9,7 @@ export class TeacherGuard implements CanLoad {
   constructor(private router: Router) { }
 
   async canLoad(): Promise<boolean> {
-    const role = localStorage.getItem('role');
+    const role = sessionStorage.getItem('role');
     if (role === 'Teacher') {
       return true;
     } else {

@@ -10,6 +10,8 @@ export class SubscriptionPage implements OnInit {
 
   freeFeatures: any[];
   premiumFeatures: any[];
+  premiumName: any = '';
+  premiumCost: any = '';
 
 
   constructor() {
@@ -17,12 +19,31 @@ export class SubscriptionPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log(sessionStorage.getItem('role'));
     this.setupConstants();
   }
 
   setupConstants() {
-    this.freeFeatures = SubscriptionConstants.freeFeatures();
-    this.premiumFeatures = SubscriptionConstants.premiumFeatures();
+    if (sessionStorage.getItem('role') === 'Student') {
+      this.premiumName = SubscriptionConstants.premiumStudentPlan().planName;
+      this.premiumCost = SubscriptionConstants.premiumStudentPlan().cost;
+      this.freeFeatures = SubscriptionConstants.freeStudentFeatures();
+      this.premiumFeatures = SubscriptionConstants.premiumStudentFeatures();
+    }
+
+    if (sessionStorage.getItem('role') === 'Teacher') {
+      this.premiumName = SubscriptionConstants.premiumTeacherPlan().planName;
+      this.premiumCost = SubscriptionConstants.premiumTeacherPlan().cost;
+      this.freeFeatures = SubscriptionConstants.freeTeacherFeatures();
+      this.premiumFeatures = SubscriptionConstants.premiumTeacherFeatures();
+    }
+
+    if (sessionStorage.getItem('role') === 'Parent') {
+      this.premiumName = SubscriptionConstants.premiumParentPlan().planName;
+      this.premiumCost = SubscriptionConstants.premiumParentPlan().cost;
+      this.freeFeatures = SubscriptionConstants.freeParentFeatures();
+      this.premiumFeatures = SubscriptionConstants.premiumParentFeatures();
+    }
   }
 
 

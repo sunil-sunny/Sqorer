@@ -30,7 +30,7 @@ export class RegisterPage implements OnInit {
       }
 
       if (data.token) {
-        localStorage.setItem('token', data.token);
+        sessionStorage.setItem('token', data.token);
         this.router.navigate(['/dashboard']);
       }
     });

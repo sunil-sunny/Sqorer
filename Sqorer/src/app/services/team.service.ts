@@ -2,15 +2,14 @@
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
 
-
-  //url: any = 'http://localhost:8082/api/team/';
-  url: any = 'http://test-service.sqorer.com/api/team/';
+  url: string = environment.serverUrl+'team/';
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +17,7 @@ export class TeamService {
 
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
@@ -29,7 +28,7 @@ export class TeamService {
   getTeamMembers(id): Observable<any[]> {
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
@@ -39,7 +38,7 @@ export class TeamService {
   createTeam(team): Observable<any[]> {
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
@@ -49,7 +48,7 @@ export class TeamService {
   addMemberToTeam(body): Observable<any> {
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     console.log('body is ' + body);
@@ -60,7 +59,7 @@ export class TeamService {
   getAllStudentsWithTeam(): Observable<any[]> {
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
@@ -71,7 +70,7 @@ export class TeamService {
   getStudentTeams(): Observable<any[]> {
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
@@ -81,7 +80,7 @@ export class TeamService {
   removeMember(body): Observable<any> {
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);

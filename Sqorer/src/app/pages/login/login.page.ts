@@ -26,12 +26,12 @@ export class LoginPage implements OnInit {
       }
 
       if (data.token) {
-        localStorage.setItem('token', data.token);
+        sessionStorage.setItem('token', data.token);
         this.authService.getUser().subscribe((data1) => {
-          localStorage.setItem('role', data1.userType);
+          sessionStorage.setItem('role', data1.userType);
           // eslint-disable-next-line no-underscore-dangle
-          localStorage.setItem('id', data1._id);
-          localStorage.setItem('isPremium', data1.isPremium);
+          sessionStorage.setItem('id', data1._id);
+          sessionStorage.setItem('isPremium', data1.isPremium);
         });
         this.router.navigate(['/dashboard']);
       }

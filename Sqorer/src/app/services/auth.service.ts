@@ -2,15 +2,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-
+  url: string = environment.serverUrl;
   //url: any = 'http://localhost:8082/api/';
-  url: any = 'http://test-service.sqorer.com/api/';
+  //url: any = 'http://test-service.sqorer.com/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -30,7 +31,7 @@ export class AuthService {
 
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
@@ -42,7 +43,7 @@ export class AuthService {
 
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);
@@ -57,7 +58,8 @@ export class AuthService {
       lastname: registerDetails.lastName,
       email: registerDetails.email,
       password: registerDetails.password,
-      userType: registerDetails.userType
+      userType: registerDetails.userType,
+      profile: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
     };
 
     return this.http.post<any>(this.url + 'user/', body);
@@ -79,7 +81,7 @@ export class AuthService {
   logout(): Observable<any> {
     const headerData = {
       // eslint-disable-next-line quote-props
-      'Auth': 'Bearer' + localStorage.getItem('token')
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
 
     };
     const reqheaders = new HttpHeaders(headerData);

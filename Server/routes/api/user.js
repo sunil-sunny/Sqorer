@@ -73,7 +73,7 @@ router.post("/", async (req, res) => {
   const { isValid, errors } = signUpValidation(req.body);
   if (!isValid)
     return res.status(404).json({ errors: errors });
-  let { firstname, lastname, email, password, userType } = req.body;
+  let { firstname, lastname, email, password, userType, profile } = req.body;
   let user = await User.findOne({ email });
   if (user)
     return res.json({ msg: "Email is already registered" });
@@ -82,7 +82,7 @@ router.post("/", async (req, res) => {
     console.log(hashedPassword);
     let lastLogin = new Date();
     const isOnline = true;
-    const userModel = new User({ firstname, lastname, email, password: hashedPassword, userType, lastLogin, isOnline });
+    const userModel = new User({ firstname, lastname, email, password: hashedPassword, userType, lastLogin, isOnline, profile });
     await userModel.save();
     const user = await User.findByCredentials(email, password);
     const token = await user.getAuthToken();

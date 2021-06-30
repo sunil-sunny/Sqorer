@@ -1,23 +1,22 @@
 <ion-header [translucent]="false">
   <ion-grid>
-    <ion-toolbar style="height: 70px;">
+    <ion-toolbar style="height: 60px;">
 
       <ion-row class="ion-no-padding" style="height: fit-content;">
-        <ion-col style="margin-top: 10px;" size="1.5" size-xl="0.5" size-lg="0.75" size-md="0.75" size-sm="1.5">
+        <ion-col size="1.5" size-xl="0.5" size-lg="0.75" size-md="0.75" size-sm="1.5">
           <ion-buttons class="ion-no-padding">
-            <ion-menu-button style="margin-top: 0px;">
+            <ion-menu-button>
 
             </ion-menu-button>
           </ion-buttons>
         </ion-col>
 
-        <ion-col style="margin-top: 10px;" size="1.75" size-xl="1.75" size-lg="2.75" size-md="3.25"
-          class="ion-hide-md-down">
+        <ion-col size="1.75" size-xl="1.75" size-lg="2.75" size-md="3.25" class="ion-hide-md-down">
           <ion-searchbar inputmode="text"></ion-searchbar>
         </ion-col>
 
-        <ion-col size="1" size-xl="1" size-lg="2" size-md="2" size-sm="2" style="margin-top: 20px;"
-          class="ion-hide-md-down">
+        <ion-col size="1" size-xl="1" size-lg="2" size-md="2" size-sm="2" class="ion-hide-md-down"
+          style="text-align: center; margin-top: 15px;">
           <span style="color: black; font-size: small;">Quick tasks <ion-icon name="chevron-down-outline"
               style="font-size: small;"></ion-icon>
           </span>
@@ -25,8 +24,7 @@
 
 
         <ion-col size="10.5" size-xl="8.75" size-lg="6.5" size-md="6" size-sm="10.5" style="margin-top: 5px;">
-          <ion-row class="padding-top-sm" style="display: flex;
-          justify-content: flex-end;">
+          <ion-row style="display: flex; justify-content: flex-end;">
 
             <ion-col size-xl="0.5" size-lg="1" size-md="1.25" size-sm="1" size="1" class="ion-hide-md-down">
               <ion-icon name="scan-outline"></ion-icon>
@@ -36,9 +34,8 @@
               <ion-icon name="notifications-outline"></ion-icon>
             </ion-col>
 
-            <ion-col size-xl="1.5" size-lg="3" size-md="4" size-sm="3" size="3"
-              style="display: flex; justify-content: center;"
-              (click)="openProfilePopOver($event)">
+            <ion-col size-xl="1.15" size-lg="3" size-md="4" size-sm="3" size="3"
+              style="display: flex; flex-direction: row;" (click)="openProfilePopOver($event)">
               <ion-card style="border-radius: 50%;height: 30px;
               width: 30px;" class="ion-no-padding ion-no-margin">
                 <ion-header>
@@ -46,8 +43,13 @@
                   </ion-img>
                 </ion-header>
               </ion-card>
-              <span class="ion-text-wrap ion-hide-md-down ion-no-padding" style="display: flex;padding-left: 10px;">
-                <span class="ion-hide-md-down"> {{firstName}}</span>
+              <span class="ion-text-wrap ion-hide-md-down ion-no-padding" style="display: flex;
+              padding-top: 5px;">
+                <span class="ion-hide-md-down text-overflow" style="width: 50px;
+                text-align: right;
+                padding-right: 3px;
+                padding-left: 10px;">
+                  {{firstName}}</span>
                 <ion-icon name="chevron-down-outline" size="small">
                 </ion-icon>
               </span>

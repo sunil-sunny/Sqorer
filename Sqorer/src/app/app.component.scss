@@ -122,3 +122,8 @@ span {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.update-profile-modal .modal-wrapper{
+  min-height: 400px;
+  height: auto;
+}

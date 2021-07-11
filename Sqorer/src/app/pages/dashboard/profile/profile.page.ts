@@ -1,8 +1,9 @@
+import { ChangeProfilePicturePage } from './../change-profile-picture/change-profile-picture.page';
 
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from './user.model';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -36,8 +37,10 @@ export class ProfilePage implements OnInit {
   linkedinLink: any = '';
   parentEmail: any = '';
   grade: any = '';
+  spinner: any = false;
 
-  constructor(private authService: AuthService, private alertController: AlertController) { }
+  constructor(private authService: AuthService, private alertController: AlertController, private modalController: ModalController, 
+    private popOverController: PopoverController) { }
 
   ngOnInit() {
     this.getUser();
@@ -79,7 +82,8 @@ export class ProfilePage implements OnInit {
   }
 
   saveUser(form) {
-    this.authService.saveUser(form.value).subscribe( async (user) => {
+    this.spinner = true;
+    this.authService.saveUser(form.value).subscribe(async (user) => {
       this.user = user;
       this.userType = user.userType;
       this.firstname = user.firstname;
@@ -107,8 +111,16 @@ export class ProfilePage implements OnInit {
         message: 'Profile has been updated',
         buttons: ['OK']
       });
+      this.spinner = false;
       await alert.present();
     });
+  }
+
+  async changeProfilePicture() {
+    const modal = await this.popOverController.create({
+      component: ChangeProfilePicturePage
+    });
+    return await modal.present();
   }
 
 }

@@ -71,7 +71,10 @@
           </ion-row>
           <ion-row style="justify-content: start;" class="padding-horizantal">
             <ion-button class="form-feild" color="primary btn-start" type="submit" [disabled]="form.invalid"
-              expand="block">Log in</ion-button>
+              expand="block">
+              <ion-spinner *ngIf="spinner" name="crescent"></ion-spinner> <span *ngIf="!spinner">Log in</span>
+            </ion-button>
+
           </ion-row>
 
         </form>

@@ -36,42 +36,51 @@
               </ion-col>
             </ion-item-divider>
           </ion-row>
+
           <ion-list class="ion-no-padding">
-
-            <ion-row style="height: fit-content;" *ngFor="let team of teams;let i=index" class="ion-no-padding">
-              <ion-item-divider class="selected-row" (click)="openTeam(team._id,team.name)">
-                <ion-col size-xl="1" size-lg="1" size-md="1" size-sm="1" size="1">
-                  <span>{{i+1}}</span>
-                </ion-col>
-
-                <ion-col size-xl="1.5" size-lg="1.5" size-md="1.75" class="ion-hide-md-down">
-                  <span>
-                    <ion-card style="border-radius: 50%;height: 35px;
-                        width: 35px;">
-                      <ion-header>
-                        <ion-img src={{team.avatar}} alt="A">
-                        </ion-img>
-                      </ion-header>
-                    </ion-card>
-                  </span>
-                </ion-col>
-
-                <ion-col size-xl="5.5" size-lg="6" size-md="5.5" size-sm="7" size="7">
-                  <span>{{team.name}}</span>
-                </ion-col>
-
-                <ion-col size-xl="2.5" size-lg="1.5" size-md="1.5" class="ion-justify-content-center ion-hide-md-down">
-                  <ion-icon name="checkbox" color="primary"></ion-icon>
-                </ion-col>
-
-                <ion-col size-xl="1.5" size-lg="1.5" size-md="1.5" size-sm="3" size="3"
-                  class="ion-justify-content-center">
-
-                  <ion-icon name="pencil-outline" color="primary"></ion-icon>
-
-                </ion-col>
-              </ion-item-divider>
+            <ion-row *ngIf="loadTeamsSpinner" class="ion-justify-content-center">
+              <ion-col col="2" style="text-align: center;">
+                <ion-spinner name="crescent" color="primary"></ion-spinner>
+              </ion-col>
             </ion-row>
+            <div *ngIf="!loadTeamsSpinner">
+
+              <ion-row style="height: fit-content;" *ngFor="let team of teams;let i=index" class="ion-no-padding">
+                <ion-item-divider class="selected-row" (click)="openTeam(team._id,team.name)">
+                  <ion-col size-xl="1" size-lg="1" size-md="1" size-sm="1" size="1">
+                    <span>{{i+1}}</span>
+                  </ion-col>
+
+                  <ion-col size-xl="1.5" size-lg="1.5" size-md="1.75" class="ion-hide-md-down">
+                    <span>
+                      <ion-card style="border-radius: 50%;height: 35px;
+                          width: 35px;">
+                        <ion-header>
+                          <ion-img src={{team.avatar}} alt="A">
+                          </ion-img>
+                        </ion-header>
+                      </ion-card>
+                    </span>
+                  </ion-col>
+
+                  <ion-col size-xl="5.5" size-lg="6" size-md="5.5" size-sm="7" size="7">
+                    <span>{{team.name}}</span>
+                  </ion-col>
+
+                  <ion-col size-xl="2.5" size-lg="1.5" size-md="1.5"
+                    class="ion-justify-content-center ion-hide-md-down">
+                    <ion-icon name="checkbox" color="primary"></ion-icon>
+                  </ion-col>
+
+                  <ion-col size-xl="1.5" size-lg="1.5" size-md="1.5" size-sm="3" size="3"
+                    class="ion-justify-content-center">
+
+                    <ion-icon name="pencil-outline" color="primary"></ion-icon>
+
+                  </ion-col>
+                </ion-item-divider>
+              </ion-row>
+            </div>
           </ion-list>
         </ion-card>
 
@@ -108,41 +117,50 @@
             </ion-item-divider>
           </ion-row>
           <ion-list class="ion-no-padding">
-            <!--  lable row -->
-            <ion-row style="height: fit-content;" *ngFor="let member of selectedTeam;let i= index"
-              class="ion-no-padding">
-              <ion-item-divider class="selected-row">
-                <ion-col size-xl="1">
-                  <span>{{i+1}}</span>
-                </ion-col>
 
-                <ion-col size-xl="1.5" class="ion-hide-md-down">
-                  <span>
-                    <ion-card style="border-radius: 50%;height: 35px; width: 35px;">
-                      <ion-header>
-                        <ion-img src={{member.profile}}>
-                        </ion-img>
-                      </ion-header>
-                    </ion-card>
-                  </span>
-                </ion-col>
-
-                <ion-col size-xl="3">
-                  <span>{{member.firstname}} {{member.lastname}}</span>
-                </ion-col>
-                <ion-col size-xl="3" class="ion-hide-md-down">
-                  <span>{{member.email}}</span>
-                </ion-col>
-                <ion-col size-xl="2" class="ion-hide-md-down">
-                  <span>{{member.country}}</span>
-                </ion-col>
-                <ion-col size-xl="1.5">
-                  <span (click)="removeMember(member.email)">
-                    <ion-icon name="close-outline" color="primary" size="large"></ion-icon>
-                  </span>
-                </ion-col>
-              </ion-item-divider>
+            <ion-row *ngIf="loadEachTeamSpinner" class="ion-justify-content-center">
+              <ion-col col="2" style="text-align: center;">
+                <ion-spinner name="crescent" color="primary"></ion-spinner>
+              </ion-col>
             </ion-row>
+            <div *ngIf="!loadEachTeamSpinner">
+              <!--  lable row -->
+              <ion-row style="height: fit-content;" *ngFor="let member of selectedTeam;let i= index"
+                class="ion-no-padding">
+                <ion-item-divider class="selected-row">
+                  <ion-col size-xl="1">
+                    <span>{{i+1}}</span>
+                  </ion-col>
+
+                  <ion-col size-xl="1.5" class="ion-hide-md-down">
+                    <span>
+                      <ion-card style="border-radius: 50%;height: 35px; width: 35px;">
+                        <ion-header>
+                          <ion-img src={{member.profile}}>
+                          </ion-img>
+                        </ion-header>
+                      </ion-card>
+                    </span>
+                  </ion-col>
+
+                  <ion-col size-xl="3">
+                    <span>{{member.firstname}} {{member.lastname}}</span>
+                  </ion-col>
+                  <ion-col size-xl="3" class="ion-hide-md-down">
+                    <span>{{member.email}}</span>
+                  </ion-col>
+                  <ion-col size-xl="2" class="ion-hide-md-down">
+                    <span>{{member.country}}</span>
+                  </ion-col>
+                  <ion-col size-xl="1.5">
+                    <span (click)="removeMember(member.email)">
+                      <ion-icon name="close-outline" color="primary" size="large"></ion-icon>
+                    </span>
+                  </ion-col>
+                </ion-item-divider>
+              </ion-row>
+            </div>
+
           </ion-list>
 
           <ion-row style="padding-top: 10px; padding-bottom: 10px; justify-content: flex-end; align-items:center;">
@@ -152,7 +170,11 @@
               </ion-item>
             </ion-col>
             <ion-col size-xl="3">
-              <ion-button color="primary" expand="block" (click)="addMemberToTeam()">Add</ion-button>
+              <ion-button color="primary" expand="block" (click)="addMemberToTeam()">
+                <ion-spinner *ngIf="spinner" name="crescent" color="primary"></ion-spinner><span *ngIf="!spinner">
+                  Add
+                </span>
+              </ion-button>
             </ion-col>
           </ion-row>
         </ion-card>
@@ -198,7 +220,9 @@
               <ion-button color="primary" expand="block" (click)="addStudent()">Add more</ion-button>
             </ion-col>
             <ion-col size-xl="3">
-              <ion-button color="primary" expand="block" (click)="createTeam()">Invite</ion-button>
+              <ion-button color="primary" expand="block" (click)="createTeam()">
+                <ion-spinner *ngIf="spinner" name="crescent"></ion-spinner> <span *ngIf="!spinner">Invite</span>
+              </ion-button>
             </ion-col>
           </ion-row>
 

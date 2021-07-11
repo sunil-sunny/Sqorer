@@ -1,0 +1,19 @@
+
+<ion-content class="ion-padding" style="height: fit-content;">
+
+    <form style="padding-top: 100px; padding-bottom: 100px;">
+        <ion-row class="padding-horizantal">
+            <ion-item class="form-feild">
+                <ion-input (change)="onFileChange($event)" type="file" name="firstname" accept="image/*"></ion-input>
+            </ion-item>
+        </ion-row>
+
+        <ion-row class="padding-horizantal">
+            <ion-col>
+                <ion-button class="form-feild" color="primary btn-start" type="submit" expand="block">Save</ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
+
+
+</ion-content>

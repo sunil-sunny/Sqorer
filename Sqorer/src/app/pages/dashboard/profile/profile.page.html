@@ -25,7 +25,7 @@
                                 <ion-col size-xl="5" size-lg="5" size-md="4" size-sm="4" size="4">
 
                                     <ion-row>
-                                        <ion-card class="profile-img">
+                                        <ion-card class="profile-img" (click)="changeProfilePicture()">
                                             <ion-header>
                                                 <ion-img src={{profile}} alt={{firstname}}>
                                                 </ion-img>
@@ -250,7 +250,10 @@
 
                             <ion-row class="padding-horizantal">
                                 <ion-button class="form-feild" color="primary btn-start" type="submit"
-                                    [disabled]="form.invalid" expand="block">Save</ion-button>
+                                    [disabled]="form.invalid" expand="block">
+                                    <ion-spinner *ngIf="spinner" name="crescent"></ion-spinner> <span
+                                        *ngIf="!spinner">Save</span>
+                                </ion-button>
                             </ion-row>
                         </form>
                     </ion-card-content>

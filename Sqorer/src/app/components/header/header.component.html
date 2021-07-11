@@ -36,13 +36,12 @@
 
             <ion-col size-xl="1.15" size-lg="3" size-md="4" size-sm="3" size="3"
               style="display: flex; flex-direction: row;" (click)="openProfilePopOver($event)">
-              <ion-card style="border-radius: 50%;height: 30px;
-              width: 30px;" class="ion-no-padding ion-no-margin">
-                <ion-header>
-                  <ion-img src={{profilePic}} alt="A">
-                  </ion-img>
-                </ion-header>
-              </ion-card>
+
+              <ion-avatar style="height: 40px; margin-top: -5px;">
+                <ion-img src={{profilePic}} alt="A">
+                </ion-img>
+              </ion-avatar>
+
               <span class="ion-text-wrap ion-hide-md-down ion-no-padding" style="display: flex;
               padding-top: 5px;">
                 <span class="ion-hide-md-down text-overflow" style="width: 50px;

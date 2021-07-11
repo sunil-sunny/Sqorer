@@ -15,12 +15,12 @@ export class HomeHeaderPopverComponent implements OnInit {
 
   openSignUp(){
     this.popover.dismiss();
-    this.router.navigate(['/auth/sign-up']);
+    this.router.navigate(['/sign-up']);
   }
 
   openSignIn(){
     this.popover.dismiss();
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/register']);
   }
 
 }

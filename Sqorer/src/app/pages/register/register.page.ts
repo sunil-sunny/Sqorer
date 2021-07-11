@@ -16,13 +16,14 @@ export class RegisterPage implements OnInit {
   email: any = '';
   password: any = '';
   userType: any = '';
+  spinner: any = false;
 
   constructor(private authService: AuthService, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() { }
 
   register(form) {
-
+    this.spinner = true;
     this.authService.registerUser(form.value).subscribe((data) => {
 
       if (data.msg) {
@@ -33,6 +34,7 @@ export class RegisterPage implements OnInit {
         sessionStorage.setItem('token', data.token);
         this.router.navigate(['/dashboard']);
       }
+      this.spinner = false;
     });
   }
 

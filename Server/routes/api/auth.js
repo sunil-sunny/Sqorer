@@ -103,7 +103,8 @@ router.post('/check-email', async (req, res) => {
     let transporter = nodemailer.createTransport({
       host: 'smtp.office365.com',
       port: 587,
-      secure: false, // true for 465, false for other ports
+      secure: false,
+      ignoreTLS: false, // true for 465, false for other ports
       auth: {
         user: `${userEmail}`, // email of the app
         pass: `${userPassword}` // password of the app
@@ -114,11 +115,11 @@ router.post('/check-email', async (req, res) => {
     Port: 587
     TLS/StartTLS: Enabled
     Username/email address: sqorersupport@augmentedutech.com
-    password: support@123#
+    password: support@123#  
      */
 
     let info = await transporter.sendMail({
-      from: '"Sqorer Support" <sqorersupport@augmentedutech.com>', // sender address
+      from: userEmail, // sender address
       to: `${email}, sai.menta@dal.ca`, // list of receivers
       subject: "PASSWORD RESET REQUEST ✔", // Subject line
       text: `Dear user,\n\n \tWe have received your request to reset your password. Please copy the code below.\n \tCode: ${code}` // plain text body                

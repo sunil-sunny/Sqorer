@@ -22,6 +22,9 @@ export class StudentsTeamsPage implements OnInit {
   addTeamMember: any;
   selectedTeamId: any;
   selectedTeamName: any;
+  spinner: any = false;
+  loadTeamsSpinner: any = false;
+  loadEachTeamSpinner: any = false;
 
   constructor(private teamsService: TeamService, private alertController: AlertController) { }
 
@@ -33,6 +36,7 @@ export class StudentsTeamsPage implements OnInit {
 
   getAllTeams() {
 
+    this.loadTeamsSpinner = true;
     if (sessionStorage.getItem('role') === 'Student') {
 
       this.teamsService.getStudentTeams().subscribe((data) => {
@@ -64,21 +68,23 @@ export class StudentsTeamsPage implements OnInit {
       });
     }
 
-
+    this.loadTeamsSpinner = false;
   }
 
   openTeam(teamId, name) {
+    this.loadEachTeamSpinner = true;
     this.selectedTeamId = teamId;
     this.selectedTeamName = name;
     this.teamsService.getTeamMembers(teamId).subscribe((data) => {
       this.selectedTeam = data;
+      this.loadEachTeamSpinner = false;
     });
   }
 
   createTeam() {
     console.log(sessionStorage.getItem('isPremium'));
     console.log('create team is working');
-
+    this.spinner = true;
     const filtered = this.addEmailFeild.filter((element) => element);
     const filteredOne = new Set(filtered);
     console.log(filteredOne);
@@ -92,6 +98,7 @@ export class StudentsTeamsPage implements OnInit {
 
     this.finalizedMembers.forEach((e) => console.log(e));
     if (this.finalizedMembers.length === 0 || this.teamName.length === 0) {
+      this.spinner = false;
       this.alert('Warning', 'Enter required team details to proceed');
     } else {
 
@@ -123,10 +130,13 @@ export class StudentsTeamsPage implements OnInit {
           this.addEmailFeild = ['', '', '', '', '', ''];
           this.teamName = '';
           this.finalizedMembers = [];
+          this.spinner = false;
         }, (err) => {
           this.alert('Error', err.error.msg);
+          this.spinner = false;
         });
       } else {
+        this.spinner = false;
         this.alert('Warning', 'you are not eligible to create a team');
       }
 
@@ -154,7 +164,9 @@ export class StudentsTeamsPage implements OnInit {
 
   addMemberToTeam() {
 
+    this.spinner = true;
     if (this.addTeamMember.length === 0) {
+      this.spinner = false;
       alert('Enter email to proceed');
     } else {
 
@@ -168,9 +180,10 @@ export class StudentsTeamsPage implements OnInit {
           this.getAllTeams();
           this.addTeamMember = '';
         }
-
+        this.spinner = false;
       }, (err) => {
-        console.log(err);
+        this.alert('error', err);
+        this.spinner = false;
       });
     }
   }
@@ -183,7 +196,7 @@ export class StudentsTeamsPage implements OnInit {
     };
     this.teamsService.removeMember(body).subscribe((data) => {
       if (data.msg) {
-        alert(data.msg);
+        this.alert("Success",data.msg);
         this.getAllTeams();
       }
     }, (err) => {

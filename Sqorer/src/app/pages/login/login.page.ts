@@ -12,6 +12,7 @@ export class LoginPage implements OnInit {
 
   email: any = '';
   password: any = '';
+  spinner: any = false;
 
   constructor(private authService: AuthService, private router: Router, private alertController: AlertController) { }
 
@@ -19,6 +20,7 @@ export class LoginPage implements OnInit {
 
   login(form) {
 
+    this.spinner = true;
     this.authService.loginUser(form.value).subscribe((data) => {
 
       if (data.msg) {
@@ -33,9 +35,11 @@ export class LoginPage implements OnInit {
           sessionStorage.setItem('id', data1._id);
           sessionStorage.setItem('isPremium', data1.isPremium);
         });
+        this.spinner = false;
         this.router.navigate(['/dashboard']);
       }
     }, (err) => {
+      this.spinner = false;
       this.alert('Error', err.error.msg);
     });
 

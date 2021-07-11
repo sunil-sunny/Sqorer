@@ -11,6 +11,7 @@ router.post('/addStudent', auth, async (req, res) => {
         const studentEmail = req.body.studentEmail;
         let user = await User.findOne({ email: studentEmail });
         user.set({ parentEmail });
+        //Add logic to send accept email to student
         await user.save();
         return res.status(200).json({ msg: "Children has been added succesfully" });
     } catch (error) {

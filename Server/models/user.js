@@ -83,6 +83,10 @@ const UserSchema = mongoose.Schema({
   parentEmail: {
     type: String
   },
+  isParentConfirmed: {
+    type: Boolean,
+    default: false
+  },
   grade: {
     type: String
   },

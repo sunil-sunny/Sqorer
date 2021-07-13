@@ -10,8 +10,6 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   url: string = environment.serverUrl;
-  //url: any = 'http://localhost:8082/api/';
-  //url: any = 'http://test-service.sqorer.com/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -75,7 +73,7 @@ export class AuthService {
       password,
       code
     };
-    return this.http.put<any>(this.url + 'auth/check-email', body);
+    return this.http.put<any>(this.url + 'auth/change-password', body);
   }
 
   logout(): Observable<any> {

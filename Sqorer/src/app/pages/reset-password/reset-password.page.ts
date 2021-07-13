@@ -14,6 +14,7 @@ export class ResetPasswordPage implements OnInit {
   email: string;
   otp: number;
   password: string;
+  resetSpinner: any = true;
 
 
   constructor(private authService: AuthService, private router: Router, private alertController: AlertController) { }
@@ -23,28 +24,30 @@ export class ResetPasswordPage implements OnInit {
   }
 
   sendOtp() {
-    console.log(this.email);
+
+    this.resetSpinner = true;
     this.authService.sendOtp(this.email).subscribe((data) => {
       if (data.msg) {
         this.alert('', data.msg);
         this.isOtpSent = true;
-        this.email = '';
       }
     }, (err) => {
       this.alert('Error', err.error.msg);
     });
-    this.isOtpSent = true;
+    this.resetSpinner = false;
   }
 
   resetPassword() {
+    this.resetSpinner = true;
     this.authService.resetPassword(this.email, this.password, this.otp).subscribe((data) => {
       if (data.msg) {
         this.alert('', data.msg);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
       }
     }, (err) => {
       this.alert('Error', err.error.msg);
     });
+    this.resetSpinner = false;
   }
 
   async alert(header, msg) {

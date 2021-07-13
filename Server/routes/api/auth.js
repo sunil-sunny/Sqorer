@@ -70,11 +70,15 @@ router.post('/check-email', async (req, res) => {
     console.log('sending otp to ' + email);
     const tempUser = await User.findOne({ email });
     if (!tempUser) return res.status(404).json({ success: false, msg: `This ${email} isn't linked with any account yet. Please enter another one.` });
-    let tempCode = await Code.findOne({ user: tempUser._id, status: false });
 
-    if (tempCode) {
-      tempCode.set({ status: true });
-      await tempCode.save();
+    //check if the user has requested a code before and that is not expired.
+    let existCodes = await Code.find({ user: tempUser._id, isExpired: false });
+
+    if (existCodes) {
+      existCodes.forEach(async (element) => {
+        element.set({ isExpired: true });
+        await element.save();
+      });
     }
 
     // a random code
@@ -82,45 +86,23 @@ router.post('/check-email', async (req, res) => {
     const user = tempUser._id;
     let newCode = new Code({ user, code });
     await newCode.save();
-
-    //check if the user has requested a code before and that is not expired.
-    const existCode = await Code.findOne({ user, isExpired: true });
-    if (existCode) {
-      existCode.set({ isExpired: true });
-      await existCode.save();
-    }
     console.log(code);
-
-    //get my email and password 
-
-    const userEmail = 'sqorersupport@augmentedutech.com';
-    const userPassword = 'support@123#';
-
-    console.log(userEmail);
-    console.log(userPassword);
-
+    const userEmail = "sqorer183@gmail.com",
+      userPassword = "Delhi@123";
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-      host: 'smtp.office365.com',
+      host: "smtp.gmail.com",
       port: 587,
-      secure: false,
-      ignoreTLS: false, // true for 465, false for other ports
+      secure: false, // true for 465, false for other ports
       auth: {
         user: `${userEmail}`, // email of the app
-        pass: `${userPassword}` // password of the app
-      }
+        pass: `${userPassword}`, // password of the app
+      },
     });
-
-    /*     Host: smtp.office365.com
-    Port: 587
-    TLS/StartTLS: Enabled
-    Username/email address: sqorersupport@augmentedutech.com
-    password: support@123#  
-     */
 
     let info = await transporter.sendMail({
       from: userEmail, // sender address
-      to: `${email}, sai.menta@dal.ca`, // list of receivers
+      to: `${email}, saisunil183@gmail.com`, // list of receivers
       subject: "PASSWORD RESET REQUEST ✔", // Subject line
       text: `Dear user,\n\n \tWe have received your request to reset your password. Please copy the code below.\n \tCode: ${code}` // plain text body                
     });
@@ -144,7 +126,7 @@ router.put('/change-password', async (req, res) => {
     const infoUser = await User.findOne({ email });
     if (!infoUser) return res.status(404).json({ msg: "This user is not linked with an account yet." })
     const tempCode = await Code.findOne({ code: code, user: infoUser._id, isExpired: false });
-    if (!tempCode) return res.status(404).json({ msg: ` Dear user an error is occured` });
+    if (!tempCode) return res.status(404).json({ msg: ` The code you have entered is invalid, try entering valid code` });
     const { createdAt, isExpired, user } = tempCode;
     if (isExpired) return res.status(401).json({ msg: `This ${code} is expired. Please request another code` });
 

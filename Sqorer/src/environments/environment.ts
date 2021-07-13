@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //serverUrl: 'http://localhost:8082/api/' ,
-  serverUrl: 'http://test-service.sqorer.com/api/'
+  serverUrl: 'http://localhost:8082/api/' ,
+  //serverUrl: 'http://test-service.sqorer.com/api/'
 };
 
 /*

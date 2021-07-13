@@ -30,10 +30,15 @@ const routes: Routes = [
     path: 'teacher-student',
     loadChildren: () => import('./teacher-student/teacher-student.module').then(m => m.TeacherStudentPageModule),
     canLoad: [TeacherGuard]
-  },  {
+  },
+  {
     path: 'change-profile-picture',
-    loadChildren: () => import('./change-profile-picture/change-profile-picture.module').then( m => m.ChangeProfilePicturePageModule)
+    loadChildren: () => import('./change-profile-picture/change-profile-picture.module').then(m => m.ChangeProfilePicturePageModule)
+  },  {
+    path: 'confirm-parent',
+    loadChildren: () => import('./confirm-parent/confirm-parent.module').then( m => m.ConfirmParentPageModule)
   }
+
 
 ];
 

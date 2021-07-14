@@ -2,7 +2,7 @@
 
 .subscription-col {
   border-radius: 10px;
-  border: 1px solid green;
+  border: 1px solid #14A800;
   background-color: white;
 }
 
@@ -13,8 +13,8 @@
 
 .divider {
   height: 0px;
-  border: 1px solid green;
-  background-color: green;
+  border: 1px solid #14A800;
+  background-color: #14A800;
 }
 
 ion-label {
@@ -22,10 +22,9 @@ ion-label {
 }
 
 li {
-  color: green;
+  color: #14a800;
   padding: 10px;
   p {
-      color: black;
+    color: black;
   }
 }
-

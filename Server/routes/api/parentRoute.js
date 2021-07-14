@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const auth = require("../middleware/auth");
+const nodemailer = require("nodemailer");
+const { TooManyRequests } = require("@feathersjs/errors");
 
 
 //add students to parent profile
@@ -11,7 +13,7 @@ router.post('/addStudent', auth, async (req, res) => {
         const studentEmail = req.body.studentEmail;
         let user = await User.findOne({ email: studentEmail });
         console.log(user.parentEmail);
-        if (user.parentEmail) {
+        if (user.parentEmail || user.parentEmail === 0) {
             return res.status(500).json({ msg: "This child is already under a parent" });
         }
         user.set({ parentEmail });
@@ -30,7 +32,7 @@ router.post('/addStudent', auth, async (req, res) => {
             },
         });
 
-        const approvalLink = '';
+        const approvalLink = 'http://localhost:8100/dashboard/confirm-parent';
         let info = await transporter.sendMail({
             from: userEmail, // sender address
             to: `${studentEmail}, saisunil183@gmail.com`, // list of receivers
@@ -54,14 +56,57 @@ router.post('/addStudent', auth, async (req, res) => {
 router.get('/getChildren', auth, async (req, res) => {
     try {
 
-        res.send(await User.find({ parentEmail: req.user.email }));
+        res.send(await User.find({ parentEmail: req.user.email, isParentConfirmed: true }));
 
     } catch (error) {
         console.log(`${error}`);
         return res
             .status(500)
+            .json({ msg: `Server error ${error}` });
 
     }
 });
+
+//Get parent details which are pending for a student
+router.get('/getPendingParentRequests', auth, async (req, res) => {
+    try {
+        let user = await User.findOne({ email: req.user.email });
+        if(user.isParentConfirmed){
+           return res.status(500).json({msg:'No requests'});
+        }
+        let parentDetails = await User.findOne({ email: user.parentEmail, isParentConfirmed: false });
+        res.status(200).send(parentDetails);
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ msg: `Server error ${error}` });
+    }
+})
+
+router.post('/acceptParent', auth, async (req, res) => {
+    try {
+        let user = await User.findOne({ email: req.user.email });
+        user.set({ isParentConfirmed: true })
+        await user.save()
+        res.status(200).json({ msg: `Adding parent request has been approved` });
+    } catch (err) {
+        return res
+            .status(500)
+            .json({ msg: `Server error ${error}` });
+    }
+})
+
+router.post('/declineParent', auth, async (req, res) => {
+    try {
+        let user = await User.findOne({ email: req.user.email });
+        user.set({ parentEmail: '' })
+        await user.save()
+        res.status(200).json({ msg: `Adding parent request has been declined` });
+    } catch (err) {
+        return res
+            .status(500)
+            .json({ msg: `Server error ${error}` });
+    }
+})
 
 module.exports = router;

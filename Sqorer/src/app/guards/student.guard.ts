@@ -5,13 +5,13 @@ import { CanLoad, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class TeacherGuard implements CanLoad {
+export class StudentGuard implements CanLoad {
 
   constructor(private router: Router, private alertController: AlertController) { }
 
   async canLoad(): Promise<boolean> {
     const role = sessionStorage.getItem('role');
-    if (role === 'Teacher') {
+    if (role === 'Student') {
       return true;
     } else {
       const alert = await this.alertController.create({
@@ -27,4 +27,5 @@ export class TeacherGuard implements CanLoad {
       return false;
     }
   }
+
 }

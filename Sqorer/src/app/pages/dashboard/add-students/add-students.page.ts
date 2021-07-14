@@ -36,7 +36,21 @@ export class AddStudentsPage implements OnInit {
 
         this.getAllChildern();
       }
+    }, (err) => {
+      this.alert('Error', err.error.msg);
     });
+  }
+
+
+  async alert(header, msg) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header,
+      subHeader: '',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
 }

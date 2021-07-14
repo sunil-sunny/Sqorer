@@ -14,7 +14,7 @@ export class AuthGuard implements CanLoad {
     if (token) {
       return true;
     } else {
-      this.router.navigateByUrl('/auth/login', { replaceUrl: true });
+      this.router.navigateByUrl('/login', { replaceUrl: true });
       return false;
     }
   }

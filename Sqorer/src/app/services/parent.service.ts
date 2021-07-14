@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ParentService {
 
-  url: any = environment.serverUrl+'parent/';
+  url: any = environment.serverUrl + 'parent/';
 
   constructor(private http: HttpClient) { }
 
@@ -31,5 +31,33 @@ export class ParentService {
     };
     const reqheaders = new HttpHeaders(headerData);
     return this.http.post<any[]>(this.url + 'addStudent', studentEmail, { headers: reqheaders });
+  }
+
+  getPendingRequestForStudent(): Observable<any> {
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
+
+    };
+    const reqheaders = new HttpHeaders(headerData);
+    return this.http.get<any>(this.url + 'getPendingParentRequests', { headers: reqheaders });
+  }
+
+  acceptParent(): Observable<any> {
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
+    };
+    const reqheaders = new HttpHeaders(headerData);
+    return this.http.post<any>(this.url + 'acceptParent', null, { headers: reqheaders });
+  }
+
+  declineParent(): Observable<any> {
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
+    };
+    const reqheaders = new HttpHeaders(headerData);
+    return this.http.post<any>(this.url + 'declineParent', null, { headers: reqheaders });
   }
 }

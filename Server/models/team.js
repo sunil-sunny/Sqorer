@@ -18,6 +18,10 @@ const teamSchema = mongoose.Schema({
             email: {
                 type: String,
                 required: true
+            },
+            acceptStatus: {
+                type: Boolean,
+                default: false
             }
         }
     ]
@@ -30,7 +34,7 @@ teamSchema.methods.toJSON = function () {
 
 teamSchema.methods.addMember = async function (email) {
     const team = this;
-    team.members = team.members.concat({email});
+    team.members = team.members.concat({ email });
     await team.save();
     return email;
 }

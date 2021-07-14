@@ -1,8 +1,10 @@
+import { StudentGuard } from './../../guards/student.guard';
 import { TeacherGuard } from './../../guards/teacher.guard';
 import { ParentGuard } from './../../guards/parent.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardPage } from './dashboard.page';
+import { ConfirmParentPageModule } from './confirm-parent/confirm-parent.module';
 
 const routes: Routes = [
   {
@@ -34,9 +36,11 @@ const routes: Routes = [
   {
     path: 'change-profile-picture',
     loadChildren: () => import('./change-profile-picture/change-profile-picture.module').then(m => m.ChangeProfilePicturePageModule)
-  },  {
+  },
+  {
     path: 'confirm-parent',
-    loadChildren: () => import('./confirm-parent/confirm-parent.module').then( m => m.ConfirmParentPageModule)
+    loadChildren: () => import('./confirm-parent/confirm-parent.module').then(m => m.ConfirmParentPageModule),
+    canLoad: [StudentGuard]
   }
 
 

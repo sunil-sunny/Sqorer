@@ -3,6 +3,7 @@ const router = express.Router();
 const Team = require("../../models/team");
 const User = require("../../models/user");
 const auth = require("../middleware/auth");
+const nodemailer = require('nodemailer')
 
 //Allow user to add member in his team
 router.post('/addMembers', auth, async (req, res) => {
@@ -89,6 +90,30 @@ router.post('/createTeam', auth, async (req, res) => {
         const teacherId = req.user._id;
         let team = new Team({ name, avatar, teacherId, members });
         await team.save();
+
+        const userEmail = "sqorer183@gmail.com",
+            userPassword = "Delhi@123";
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: `${userEmail}`, // email of the app
+                pass: `${userPassword}`, // password of the app
+            },
+        });
+        members.forEach(async (element) => {
+
+            console.log('------' + element.email)
+            let info = await transporter.sendMail({
+                from: userEmail, // sender address
+                to: `${element.email}, saisunil183@gmail.com`, // list of receivers
+                subject: "PASSWORD RESET REQUEST ✔", // Subject line
+                text: `Dear user,\n\n \tWe have received your request to reset your password. Please copy the code below.\n \tCode: ${code}` // plain text body                
+            });
+        });
+
         return res.json(team);
     } catch (error) {
         console.log(`${error}`);

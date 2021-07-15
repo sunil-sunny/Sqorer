@@ -132,6 +132,9 @@ export class StudentsTeamsPage implements OnInit {
           this.finalizedMembers = [];
           this.spinner = false;
         }, (err) => {
+          this.addEmailFeild = ['', '', '', '', '', ''];
+          this.teamName = '';
+          this.finalizedMembers = [];
           this.alert('Error', err.error.msg);
           this.spinner = false;
         });
@@ -167,7 +170,7 @@ export class StudentsTeamsPage implements OnInit {
     this.spinner = true;
     if (this.addTeamMember.length === 0) {
       this.spinner = false;
-      alert('Enter email to proceed');
+      this.alert('', 'Enter email to proceed');
     } else {
 
       const body = {
@@ -176,13 +179,13 @@ export class StudentsTeamsPage implements OnInit {
       };
       this.teamsService.addMemberToTeam(body).subscribe((data) => {
         if (data.msg) {
-          alert(data.msg);
+          this.alert('Success', data.msg);
           this.getAllTeams();
           this.addTeamMember = '';
         }
         this.spinner = false;
       }, (err) => {
-        this.alert('error', err);
+        this.alert('error', err.error.msg);
         this.spinner = false;
       });
     }
@@ -196,11 +199,11 @@ export class StudentsTeamsPage implements OnInit {
     };
     this.teamsService.removeMember(body).subscribe((data) => {
       if (data.msg) {
-        this.alert("Success",data.msg);
+        this.alert("Success", data.msg);
         this.getAllTeams();
       }
     }, (err) => {
-      alert(err);
+      this.alert('Error', err);
     });
   }
 }

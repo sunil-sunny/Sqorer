@@ -116,7 +116,14 @@
               </ion-col>
             </ion-item-divider>
           </ion-row>
+  
           <ion-list class="ion-no-padding">
+
+            <ion-row *ngIf="selectedTeam.length==0" class="ion-justify-content-center" style="height: 250px;">
+              <ion-col size="3">
+                <span>Students have to accept the invitation to be showed here.</span>
+              </ion-col>
+            </ion-row>
 
             <ion-row *ngIf="loadEachTeamSpinner" class="ion-justify-content-center">
               <ion-col col="2" style="text-align: center;">

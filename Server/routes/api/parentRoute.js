@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const auth = require("../middleware/auth");
-const nodemailer = require("nodemailer");
-const { TooManyRequests } = require("@feathersjs/errors");
+const { ACCEPT_PARENT_LINK } = require('../../config/constants')
+
 
 
 //add students to parent profile
@@ -18,10 +18,9 @@ router.post('/addStudent', auth, async (req, res) => {
         }
         user.set({ parentEmail });
         //Add logic to send accept email to student
-        const approvalLink = 'http://localhost:8100/dashboard/confirm-parent';
         const subject = 'CONFIRM PARENT REQUEST ✔';
         const message = `Dear Student,\n\n \tWe have received your request from ${parentEmail} adding you as his/her child.
-         Please approve it by clicking below link.\n \tCode: ${approvalLink}`
+         Please approve it by clicking below link.\n \tCode: ${ACCEPT_PARENT_LINK}`
         sendEmail(studentEmail, subject, message);
         await user.save();
         return res.status(200).json({ msg: "Children has been added succesfully" });

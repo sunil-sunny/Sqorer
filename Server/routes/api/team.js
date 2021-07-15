@@ -3,13 +3,12 @@ const router = express.Router();
 const Team = require("../../models/team");
 const User = require("../../models/user");
 const auth = require("../middleware/auth");
-const nodemailer = require('nodemailer')
-
+const sendEmail = require("../../config/sendEmail");
+const { TEAM_INVITE_LINK, TEAM_JOINING_SUBJECT } = require('../../config/constants')
 
 //Allow user to add member in his team
 router.post('/addMembers', auth, async (req, res) => {
     try {
-
         const { teamId, members } = req.body;
         const team = await Team.findOne({ _id: teamId });
         console.log(members + ' adding');
@@ -37,13 +36,11 @@ router.post('/addMembers', auth, async (req, res) => {
         console.log(isExits);
         console.log(studentsEligible);
         if (!isExits && studentsEligible) {
-
+            const link = TEAM_INVITE_LINK + teamId;
             for (let i = 0; i < members.length; i++) {
-                const approvalLink = '';
-                const subject = 'TEAM JOINING REQUEST ✔';
                 const message = `Dear user,\n\n \t You have been invite to be part of a new team. Please click the link below to accept or decline.
-                \n \t link : Please approve it by clicking below link.\n \tCode: ${approvalLink} `
-                sendEmail(members[i], subject, message);
+                \n \t link : Please approve it by clicking below link.\n \tCode: ${link} `
+                sendEmail(members[i], TEAM_JOINING_SUBJECT, message);
                 await team.addMember(members[i]);
             }
 
@@ -100,6 +97,10 @@ router.put('/:id', async (req, res) => {
         members.map(item => {
             team.members.push(item);
         })
+        const link = TEAM_INVITE_LINK + team._id;
+        const message = `Dear user,\n\n \t You have been invite to be part of ${team.name}. Please click the link below to accept or decline.
+                \n \t link : ${link} `
+        sendEmail(user.email, TEAM_JOINING_SUBJECT, message);
 
         await team.save();
         return res.json(team);
@@ -127,16 +128,19 @@ router.post('/createTeam', auth, async (req, res) => {
         }
 
         if (isExits) {
-            members.forEach(async (element) => {
-                console.log('sending email to ' + element.email);
-                const subject = 'TEAM JOINING REQUEST ✔';
-                const message = `Dear user,\n\n \t You have been invite to be part of ${name}. Please click the link below to accept or decline.
-                \n \t link : `
-                sendEmail(element.email, subject, message);
-            });
+
+            let id = ''
             let team = new Team({ name, avatar, teacherId, members });
-            console.log('confimed team is ' + team)
-            await team.save();
+            await team.save((err, newTeam) => {
+                console.log(newTeam);
+                id = newTeam._id;
+            });
+            const link = TEAM_INVITE_LINK + team._id;
+            members.forEach(async (element) => {
+                const message = `Dear user,\n\n \t You have been invite to be part of ${name}. Please click the link below to accept or decline.
+                \n \t link : ${link}`
+                sendEmail(element.email, TEAM_JOINING_SUBJECT, message);
+            });
             return res.json(team);
         } else {
             throw new Error('One of the students are not registered with sqorer');
@@ -246,13 +250,14 @@ router.get('/getAllTeams/all', auth, async (req, res) => {
 router.get('/getTeamMembers/:id', auth, async (req, res) => {
     try {
         const groupId = req.params.id;
-        console.log(groupId);
         let team = await Team.findOne({ _id: groupId });
         let emailMembers = team.members;
         let members = [];
         for (var i = 0; i < emailMembers.length; i++) {
-            const user = await User.findOne({ email: emailMembers[i].email });
-            members.push(user);
+            if (emailMembers[i].acceptStatus) {
+                const user = await User.findOne({ email: emailMembers[i].email });
+                members.push(user);
+            }
         }
 
         res.send(members);
@@ -265,8 +270,29 @@ router.get('/getTeamMembers/:id', auth, async (req, res) => {
     }
 })
 
-router.post('/acceptStudent', async (req, res) => {
+router.post('/acceptStudent/:id', auth, async (req, res) => {
+    try {
+        const email = req.user.email;
+        const teamId = req.params.id;
+        let team = await Team.findOne({ _id: teamId });
+        if (team) {
+            team.members.forEach((element) => {
+                if (element.email === email) {
+                    element.acceptStatus = true;
+                }
+            });
+            await team.save();
+            res.status(200).json({ msg: `Thank you for accepting the invite. You are now a part of ${team.name}` })
+        } else {
+            throw new Error('Invalid Group Id');
+        }
+
+    } catch (err) {
+        return res
+            .status(500)
+            .json({ msg: `Server error ${err}` });
+    }
 
 })
 
-module.exports = router; 7
+module.exports = router;

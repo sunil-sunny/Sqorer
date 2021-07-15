@@ -41,7 +41,13 @@ const routes: Routes = [
     path: 'confirm-parent',
     loadChildren: () => import('./confirm-parent/confirm-parent.module').then(m => m.ConfirmParentPageModule),
     canLoad: [StudentGuard]
+  },
+  {
+    path: 'confirm-team/:id',
+    loadChildren: () => import('./confirm-team/confirm-team.module').then(m => m.ConfirmTeamPageModule),
+    canLoad: [StudentGuard]
   }
+
 
 
 ];

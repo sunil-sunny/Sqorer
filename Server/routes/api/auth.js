@@ -10,6 +10,7 @@ const Code = require("../../models/code");
 const signInValidation = require('../../validations/signIn');
 const auth = require("../middleware/auth");
 const sendEmail = require('../../config/sendEmail');
+const { RESET_PASSWORD_SUBJECT, RESET_PASSWORD_MESSAGE } = require('../../config/constants')
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -103,9 +104,9 @@ router.post('/check-email', async (req, res) => {
     const user = tempUser._id;
     let newCode = new Code({ user, code });
     await newCode.save();
-    console.log(code);
-    const subject = 'PASSWORD RESET REQUEST ✔';
-    const message = `Dear user,\n\n \tWe have received your request to reset your password. Please copy the code below.\n \tCode: ${code}`
+    const subject = RESET_PASSWORD_SUBJECT;
+    const message = RESET_PASSWORD_MESSAGE + code;
+    console.log(message)
     sendEmail(email, subject, message);
     code = parseInt(code);
     return res.json({ msg: `Dear ${tempUser.firstname}, please check your mail account, we have send you a code. Please do it before the next 60 minutes.` });

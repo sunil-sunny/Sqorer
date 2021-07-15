@@ -3,13 +3,14 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { identifierName } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
 
-  url: string = environment.serverUrl+'team/';
+  url: string = environment.serverUrl + 'team/';
 
   constructor(private http: HttpClient) { }
 
@@ -85,5 +86,14 @@ export class TeamService {
     };
     const reqheaders = new HttpHeaders(headerData);
     return this.http.put<any>(this.url + 'removeMembers', body, { headers: reqheaders });
+  }
+
+  acceptTeamInvite(id: any): Observable<any> {
+    const headerData = {
+      // eslint-disable-next-line quote-props
+      'Auth': 'Bearer' + sessionStorage.getItem('token')
+
+    };
+    return this.http.post<any>(this.url + '/acceptStudent/' + id, null, { headers: headerData });
   }
 }

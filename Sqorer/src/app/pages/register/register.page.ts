@@ -48,6 +48,7 @@ export class RegisterPage implements OnInit {
       this.googleAuthService.registerUserWithGoogle(this.userType);
     }
   }
+
   async alert(header, msg) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',

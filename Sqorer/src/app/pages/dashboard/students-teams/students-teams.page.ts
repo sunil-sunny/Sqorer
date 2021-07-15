@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class StudentsTeamsPage implements OnInit {
 
   teams: any[];
-  selectedTeam: any;
+  selectedTeam: any[]=[];
   limit: any = 4;
   selectedTeamMembers: any[];
   addEmailFeild: any[] = ['', '', '', '', '', ''];
@@ -49,7 +49,6 @@ export class StudentsTeamsPage implements OnInit {
         // eslint-disable-next-line no-underscore-dangle
         this.teamsService.getTeamMembers(this.teams[0]._id).subscribe((data1) => {
           this.selectedTeam = data1;
-
         });
       });
     } else {
@@ -77,6 +76,7 @@ export class StudentsTeamsPage implements OnInit {
     this.selectedTeamName = name;
     this.teamsService.getTeamMembers(teamId).subscribe((data) => {
       this.selectedTeam = data;
+      console.log(this.selectedTeam.length);
       this.loadEachTeamSpinner = false;
     });
   }

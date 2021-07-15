@@ -9,6 +9,7 @@ const User = require("../../models/user");
 const Code = require("../../models/code");
 const signInValidation = require('../../validations/signIn');
 const auth = require("../middleware/auth");
+const sendEmail = require('../../config/sendEmail');
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -103,28 +104,10 @@ router.post('/check-email', async (req, res) => {
     let newCode = new Code({ user, code });
     await newCode.save();
     console.log(code);
-    const userEmail = "sqorer183@gmail.com",
-      userPassword = "Delhi@123";
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: `${userEmail}`, // email of the app
-        pass: `${userPassword}`, // password of the app
-      },
-    });
-
-    let info = await transporter.sendMail({
-      from: userEmail, // sender address
-      to: `${email}, saisunil183@gmail.com`, // list of receivers
-      subject: "PASSWORD RESET REQUEST ✔", // Subject line
-      text: `Dear user,\n\n \tWe have received your request to reset your password. Please copy the code below.\n \tCode: ${code}` // plain text body                
-    });
-
+    const subject = 'PASSWORD RESET REQUEST ✔';
+    const message = `Dear user,\n\n \tWe have received your request to reset your password. Please copy the code below.\n \tCode: ${code}`
+    sendEmail(email, subject, message);
     code = parseInt(code);
-
     return res.json({ msg: `Dear ${tempUser.firstname}, please check your mail account, we have send you a code. Please do it before the next 60 minutes.` });
   } catch (error) {
     console.log(error);

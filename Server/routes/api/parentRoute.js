@@ -18,29 +18,11 @@ router.post('/addStudent', auth, async (req, res) => {
         }
         user.set({ parentEmail });
         //Add logic to send accept email to student
-
-        const userEmail = "sqorer183@gmail.com",
-            userPassword = "Delhi@123";
-        // create reusable transporter object using the default SMTP transport
-        let transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-                user: `${userEmail}`, // email of the app
-                pass: `${userPassword}`, // password of the app
-            },
-        });
-
         const approvalLink = 'http://localhost:8100/dashboard/confirm-parent';
-        let info = await transporter.sendMail({
-            from: userEmail, // sender address
-            to: `${studentEmail}, saisunil183@gmail.com`, // list of receivers
-            subject: "CONFIRM PARENT REQUEST ✔", // Subject line
-            text: `Dear Student,\n\n \tWe have received your request from ${parentEmail} adding you as his/her child. Please approve it by clicking below link.\n \tCode: ${approvalLink}` // plain text body                
-        });
-
-
+        const subject = 'CONFIRM PARENT REQUEST ✔';
+        const message = `Dear Student,\n\n \tWe have received your request from ${parentEmail} adding you as his/her child.
+         Please approve it by clicking below link.\n \tCode: ${approvalLink}`
+        sendEmail(studentEmail, subject, message);
         await user.save();
         return res.status(200).json({ msg: "Children has been added succesfully" });
     } catch (error) {
@@ -71,8 +53,8 @@ router.get('/getChildren', auth, async (req, res) => {
 router.get('/getPendingParentRequests', auth, async (req, res) => {
     try {
         let user = await User.findOne({ email: req.user.email });
-        if(user.isParentConfirmed){
-           return res.status(500).json({msg:'No requests'});
+        if (user.isParentConfirmed) {
+            return res.status(500).json({ msg: 'No requests' });
         }
         let parentDetails = await User.findOne({ email: user.parentEmail, isParentConfirmed: false });
         res.status(200).send(parentDetails);

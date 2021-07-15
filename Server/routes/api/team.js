@@ -36,28 +36,14 @@ router.post('/addMembers', auth, async (req, res) => {
         }
         console.log(isExits);
         console.log(studentsEligible);
-        const userEmail = "sqorer183@gmail.com",
-            userPassword = "Delhi@123";
         if (!isExits && studentsEligible) {
-            let transporter = nodemailer.createTransport({
-                host: "smtp.gmail.com",
-                port: 587,
-                secure: false, // true for 465, false for other ports
-                auth: {
-                    user: `${userEmail}`, // email of the app
-                    pass: `${userPassword}`, // password of the app
-                },
-            });
 
             for (let i = 0; i < members.length; i++) {
-                console.log('sending email to' + members[i])
-                let info = await transporter.sendMail({
-                    from: userEmail, // sender address
-                    to: members[i], // list of receivers
-                    subject: "TEAM JOINING REQUEST ✔", // Subject line
-                    text: `Dear user,\n\n \t You have been invite to be part of a new team. Please click the link below to accept or decline.
-                        \n \t link : ` // plain text body                
-                });
+                const approvalLink = '';
+                const subject = 'TEAM JOINING REQUEST ✔';
+                const message = `Dear user,\n\n \t You have been invite to be part of a new team. Please click the link below to accept or decline.
+                \n \t link : Please approve it by clicking below link.\n \tCode: ${approvalLink} `
+                sendEmail(members[i], subject, message);
                 await team.addMember(members[i]);
             }
 
@@ -71,10 +57,10 @@ router.post('/addMembers', auth, async (req, res) => {
         }
 
     } catch (error) {
-        console.log(`${error}`);
+        console.log(`${error} `);
         return res
             .status(500)
-            .json({ msg: `${error}` });
+            .json({ msg: `${error} ` });
     }
 })
 
@@ -90,10 +76,10 @@ router.put('/removeMembers', auth, async (req, res) => {
         await team.save();
         res.status(200).json({ msg: 'Student has been removed' });
     } catch (error) {
-        console.log(`${error}`);
+        console.log(`${error} `);
         return res
             .status(500)
-            .json({ msg: `Server error ${error}` });
+            .json({ msg: `Server error ${error} ` });
     }
 })
 
@@ -130,20 +116,7 @@ router.post('/createTeam', auth, async (req, res) => {
     try {
         const { name, avatar, members } = req.body;
         const teacherId = req.user._id;
-        console.log('creation started')
-        const userEmail = "sqorer183@gmail.com",
-            userPassword = "Delhi@123";
-        // create reusable transporter object using the default SMTP transport
-        let transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-                user: `${userEmail}`, // email of the app
-                pass: `${userPassword}`, // password of the app
-            },
-        });
-
+        console.log('creation started');
         let isExits = true;
         for (let i = 0; i < members.length; i++) {
             console.log(members[i].email);
@@ -155,14 +128,11 @@ router.post('/createTeam', auth, async (req, res) => {
 
         if (isExits) {
             members.forEach(async (element) => {
-                console.log('sending email to ' + element.email)
-                let info = await transporter.sendMail({
-                    from: userEmail, // sender address
-                    to: `${element.email}`, // list of receivers
-                    subject: "TEAM JOINING REQUEST ✔", // Subject line
-                    text: `Dear user,\n\n \t You have been invite to be part of ${name}. Please click the link below to accept or decline.
-                        \n \t link : ` // plain text body                
-                });
+                console.log('sending email to ' + element.email);
+                const subject = 'TEAM JOINING REQUEST ✔';
+                const message = `Dear user,\n\n \t You have been invite to be part of ${name}. Please click the link below to accept or decline.
+                \n \t link : `
+                sendEmail(element.email, subject, message);
             });
             let team = new Team({ name, avatar, teacherId, members });
             console.log('confimed team is ' + team)
@@ -299,4 +269,4 @@ router.post('/acceptStudent', async (req, res) => {
 
 })
 
-module.exports = router;7
+module.exports = router; 7

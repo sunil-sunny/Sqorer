@@ -1,3 +1,5 @@
+import { GoogleAuthService } from './../../services/google-auth.service';
+/* eslint-disable quote-props */
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -20,7 +22,7 @@ export class LoginPage implements OnInit {
   auth = firebase.auth();
 
   constructor(private authService: AuthService, private router: Router, private alertController: AlertController,
-    private afAuth: AngularFireAuth) { }
+    private afAuth: AngularFireAuth, private googleAuthService: GoogleAuthService) { }
 
   ngOnInit() { }
 
@@ -69,21 +71,10 @@ export class LoginPage implements OnInit {
 
   // Sign in with Gmail
   googleAuth() {
-    console.log('in google login method');
-    this.authLoginGoogle(new firebase.auth.GoogleAuthProvider());
+    this.googleAuthService.signInWithGoogle();
   }
 
-  // Auth providers
-  authLoginGoogle(provider) {
-    console.log('opening popup');
-    firebase.auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        console.log(result);
-      }).catch((error) => {
-        console.log(error);
-      });
-  }
+
 
   fbAuth() {
     console.log('in fb auth');
@@ -96,7 +87,7 @@ export class LoginPage implements OnInit {
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result);
+        console.log(result.additionalUserInfo.profile);
 
       })
       .catch((error) => {

@@ -1,3 +1,4 @@
+import { GoogleAuthService } from './../../services/google-auth.service';
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -18,7 +19,8 @@ export class RegisterPage implements OnInit {
   userType: any = '';
   spinner: any = false;
 
-  constructor(private authService: AuthService, private router: Router, private alertController: AlertController) { }
+  constructor(private authService: AuthService, private router: Router, private alertController: AlertController,
+    private googleAuthService: GoogleAuthService) { }
 
   ngOnInit() { }
 
@@ -38,6 +40,14 @@ export class RegisterPage implements OnInit {
     });
   }
 
+
+  registerWithGoogle() {
+    if (this.userType === '' || this.userType.length === 0) {
+      this.alert('Error', 'Select the role you wanted to register');
+    } else {
+      this.googleAuthService.registerUserWithGoogle(this.userType);
+    }
+  }
   async alert(header, msg) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',

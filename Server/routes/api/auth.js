@@ -15,44 +15,60 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+//Logging in with google
 router.post('/google', async (req, res) => {
   try {
 
     const profileObj = req.body;
+    const { id } = profileObj;
+    const googleId = id;
 
-    let user = await User.findOne({ googleId: profileObj.googleId });
-
+    let user = await User.findOne({ googleId });
 
     if (!user) {
-      const googleId = profileObj.googleId, password = profileObj.id, email = profileObj.email, firstname = profileObj.givenName, lastname = profileObj.familyName;
-      user = new User({ googleId, firstname, lastname, email, password });
-      await user.save();
+      throw new Error('You are not registered with sqorer. Try signing up using Google.')
+    } else {
+      let token = await user.getAuthToken();
+      console.log(token);
+      res.status(200).json({ token });
     }
-
-    const payload = {
-      id: user.id,
-    };
-
-    //return token
-    jwt.sign(
-      payload,
-      config.get("jwtSecret"),
-      {
-        expiresIn: 360000,
-      },
-      (err, token) => {
-        if (err)
-          return res.status(500).json({
-            msg: `Error, can't create a new token ${err}`,
-          });
-        return res.json({ token: token });
-      }
-    );
   } catch (error) {
     console.log(`${error}`);
     return res
       .status(500)
-      .json({ msg: `Server error ${error}` });
+      .json({ msg: `${error}` });
+  }
+});
+
+//Registering with google
+router.post('/google/register/:type', async (req, res) => {
+  try {
+
+    const profileObj = req.body;
+    const { id, given_name, family_name, email, picture } = profileObj;
+    const googleId = id;
+    const firstname = given_name;
+    const lastname = family_name;
+    const profile = picture;
+    let user = await User.findOne({ googleId });
+    var today = new Date();
+    console.log(user);
+    if (!user) {
+      console.log('creating new user');
+      const userModel = new User({ googleId, firstname, lastname, email, userType: req.params.type, profile });
+      await userModel.save();
+      let token = await userModel.getAuthToken();
+      console.log(token);
+      res.status(200).json({ token });
+
+    } else {
+      throw new Error('You are already registered with sqorer. Try signing in using Google.')
+    }
+  } catch (error) {
+    console.log(`${error}`);
+    return res
+      .status(500)
+      .json({ msg: `${error}` });
   }
 })
 
@@ -170,7 +186,6 @@ router.post("/", async (req, res) => {
   if (!isValid)
     return res.status(404).json({ errors: errors });
   const { email, password } = req.body;
-  console.log(`Trying to login as ${email}`);
   try {
     let user = await User.findByCredentials(email, password);
     let token = await user.getAuthToken();

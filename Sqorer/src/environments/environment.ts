@@ -13,8 +13,8 @@ export const environment = {
     appId: '1:346076957472:web:76d1c408926cb864162545',
     measurementId: 'G-41JQXNFNRP'
   },
-  serverUrl: 'http://localhost:8082/api/' ,
-  //serverUrl: 'http://test-service.sqorer.com/api/'
+  //serverUrl: 'http://localhost:8082/api/' ,
+  serverUrl: 'http://test-service.sqorer.com/api/'
 };
 
 /*

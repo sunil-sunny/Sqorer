@@ -4,6 +4,15 @@
 
 export const environment = {
   production: false,
+  firebaseConfig : {
+    apiKey: 'AIzaSyCb683tLxi00DOKYfr0KavUCwAPYKTVrFY',
+    authDomain: 'sqorer-fa9b5.firebaseapp.com',
+    projectId: 'sqorer-fa9b5',
+    storageBucket: 'sqorer-fa9b5.appspot.com',
+    messagingSenderId: '346076957472',
+    appId: '1:346076957472:web:76d1c408926cb864162545',
+    measurementId: 'G-41JQXNFNRP'
+  },
   serverUrl: 'http://localhost:8082/api/' ,
   //serverUrl: 'http://test-service.sqorer.com/api/'
 };

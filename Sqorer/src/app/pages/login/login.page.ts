@@ -2,6 +2,10 @@ import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { firebase } from '@firebase/app';
+import '@firebase/auth';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +17,10 @@ export class LoginPage implements OnInit {
   email: any = '';
   password: any = '';
   spinner: any = false;
+  auth = firebase.auth();
 
-  constructor(private authService: AuthService, private router: Router, private alertController: AlertController) { }
+  constructor(private authService: AuthService, private router: Router, private alertController: AlertController,
+    private afAuth: AngularFireAuth) { }
 
   ngOnInit() { }
 
@@ -59,6 +65,44 @@ export class LoginPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  // Sign in with Gmail
+  googleAuth() {
+    console.log('in google login method');
+    this.authLoginGoogle(new firebase.auth.GoogleAuthProvider());
+  }
+
+  // Auth providers
+  authLoginGoogle(provider) {
+    console.log('opening popup');
+    firebase.auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result);
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
+
+  fbAuth() {
+    console.log('in fb auth');
+    this.authLoginFB(new firebase.auth.FacebookAuthProvider());
+  }
+
+  authLoginFB(provider) {
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   }
 
 }
